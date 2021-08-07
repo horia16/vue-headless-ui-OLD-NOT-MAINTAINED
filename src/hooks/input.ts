@@ -87,3 +87,13 @@ export function useInput(props: InputBaseProps, context: SetupContext<any>) {
     handleBlur,
   };
 }
+
+export function useModel(props: any, context: SetupContext<any>) {
+  const model = computed({
+    get: () => props.modelValue,
+    set: (val) => {
+      context.emit("update:modelValue", val);
+    },
+  });
+  return model;
+}
