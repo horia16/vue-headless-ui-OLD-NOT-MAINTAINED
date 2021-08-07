@@ -27,7 +27,7 @@ export interface FieldData {
   validate: () => Promise<ValidationResult>;
 }
 
-export function useInput(props: InputBaseProps, context: SetupContext) {
+export function useInput(props: InputBaseProps, context: SetupContext<any>) {
   // Use the provided id otherwise generate a random one
   const inputId = props.id
     ? `${props.id}`

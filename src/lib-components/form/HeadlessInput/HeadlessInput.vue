@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <component :is="element">
     <slot :errorMessage="errorMessage" :state="state" :validate="validate" :handleBlur="handleBlur" />
-  </div>
+  </component>
 </template>
 <script lang="ts">
-import { defineComponent, provide } from "vue";
+import { defineComponent, PropType, provide } from "vue";
 import { useInput, InputBaseProps } from "../../../hooks/input";
 export default defineComponent({
   name: "HeadlessInput",
@@ -13,7 +13,15 @@ export default defineComponent({
     id: { type: [String, Number], default: null },
     name: { type: [String, Number], default: null },
     rules: { type: [String, Function], default: null },
+    element: {
+      type: String as PropType<"div" | "fieldset">,
+      default: "div",
+      validator: (value: string) => {
+        return ["div", "fieldset"].indexOf(value) != -1;
+      },
+    },
   },
+  emits: ["update:modelValue", "blur"],
   setup(props, context) {
     const { errorMessage, inputValue, inputName, inputId, state, validate, handleBlur } = useInput(
       props as InputBaseProps,

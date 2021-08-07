@@ -1,5 +1,5 @@
 <template>
-  <div class="input-error" v-if="errorMessage && state == 'error'">
+  <div :id="`${id}-error`" data-error="true" v-if="errorMessage && state == 'error'">
     <slot :errorMessage="errorMessage">
       {{ errorMessage }}
     </slot>
@@ -12,9 +12,11 @@ export default defineComponent({
   setup() {
     const errorMessage = inject("errorMessage") as string;
     const state = inject("state") as string;
+    const id = inject("id") as string;
     return {
       errorMessage,
       state,
+      id,
     };
   },
 });
