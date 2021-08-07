@@ -1,0 +1,38 @@
+<template>
+  <div>
+    <slot :errorMessage="errorMessage" :state="state" :validate="validate" :handleBlur="handleBlur" />
+  </div>
+</template>
+<script lang="ts">
+import { defineComponent, provide } from "vue";
+import { useInput, InputBaseProps } from "../../../hooks/input";
+export default defineComponent({
+  name: "HeadlessInput",
+  props: {
+    modelValue: { type: [String, Number, Boolean], default: null },
+    id: { type: [String, Number], default: null },
+    name: { type: [String, Number], default: null },
+    rules: { type: [String, Function], default: null },
+  },
+  setup(props, context) {
+    const { errorMessage, inputValue, inputName, inputId, state, validate, handleBlur } = useInput(
+      props as InputBaseProps,
+      context
+    );
+    provide("errorMessage", errorMessage);
+    provide("inputValue", inputValue);
+    provide("name", inputName);
+    provide("id", inputId);
+    provide("state", state);
+    provide("validate", validate);
+    provide("handleBlur", handleBlur);
+
+    return {
+      errorMessage,
+      state,
+      validate,
+      handleBlur,
+    };
+  },
+});
+</script>
