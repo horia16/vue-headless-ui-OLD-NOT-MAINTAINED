@@ -1,4 +1,9 @@
-![Vue Headless Logo](https://user-images.githubusercontent.com/32731652/128597097-52daa7fc-99b6-4741-83f6-8a41c176c178.png)
+<p align="center">
+  <a href="#" target="_blank">
+    <img alt="Vue Headless UI Logo" width="100" src="https://user-images.githubusercontent.com/32731652/128597097-52daa7fc-99b6-4741-83f6-8a41c176c178.png">
+  </a>
+</p>
+
 # THIS LIBRARY IS AT THE APLHA STAGE!
 
 ## DO NOT USE IN PRODUCTION!
