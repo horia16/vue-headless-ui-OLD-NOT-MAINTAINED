@@ -1,6 +1,6 @@
 <p align="center">
   <a href="#" target="_blank">
-    <img alt="Vue Headless UI Logo" width="300" src="https://user-images.githubusercontent.com/32731652/128612316-5c37ee76-7ee4-4ec3-821f-8242c9d8cce0.png">
+    <img alt="Vue Headless UI Logo" width="300" src="https://user-images.githubusercontent.com/32731652/128613176-f737605a-a1b8-45d7-93f3-49d50cfc24d2.png">
   </a>
 </p>
 
