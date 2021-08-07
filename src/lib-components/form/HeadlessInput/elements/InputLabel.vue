@@ -1,5 +1,5 @@
 <template>
-  <component :is="element" :for="inputId">
+  <component :is="element" :for="isWrapper ? null : element == 'label' ? inputId : null">
     <slot>
       {{ text }}
     </slot>
@@ -18,10 +18,10 @@ export default defineComponent({
         return ["label", "legend"].indexOf(value) != -1;
       },
     },
+    isWrapper: { type: Boolean, default: false },
   },
   setup() {
     const inputId = inject("id") as string;
-
     return {
       inputId,
     };

@@ -1,7 +1,7 @@
 import { SetupContext, computed, ComputedRef, Ref } from "vue";
 import { useField } from "vee-validate";
 export interface InputBaseProps {
-  modelValue: string | number | boolean | null;
+  modelValue: string | number | boolean | Array<any> | null;
   id: string | number | null;
   name: string | number | null;
   rules: string | ((value: any) => boolean | string) | null;
@@ -64,8 +64,15 @@ export function useInput(props: InputBaseProps, context: SetupContext<any>) {
   // If we have a value upon setup validate it
   if (props.modelValue) {
     value.value = props.modelValue;
-    meta.touched = true;
-    validate();
+    if (Array.isArray(value.value)) {
+      if (value.value.length > 0) {
+        meta.touched = true;
+        validate();
+      }
+    } else {
+      meta.touched = true;
+      validate();
+    }
   }
 
   return {

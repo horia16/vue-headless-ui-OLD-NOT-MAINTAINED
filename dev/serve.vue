@@ -1,11 +1,11 @@
 <template>
   <div>
-    <headless-input v-model="model" rules="required">
+    <headless-input v-model="testData.input1" rules="required">
       <input-label text="Test Label" />
       <input-field />
       <input-error />
     </headless-input>
-    <headless-input v-model="model2" rules="required">
+    <headless-input v-model="testData.input2" rules="required">
       <input-label text="Test Label" />
       <select-field
         :options="[
@@ -15,25 +15,60 @@
       />
       <input-error />
     </headless-input>
+
+    <headless-input element="fieldset" v-model="testData.input3" rules="required">
+      <input-label text="Test Label" element="legend" />
+      <input-label isWrapper>
+        <radio-field value="test" :index="1" />
+        Test label
+      </input-label>
+      <input-label isWrapper>
+        <radio-field value="test2" :index="2" />
+        Test label 2
+      </input-label>
+      <input-error />
+    </headless-input>
+
+    <headless-input element="fieldset" v-model="testData.input4" rules="required">
+      <input-label text="Test Label" element="legend" />
+      <input-label isWrapper>
+        <checkbox-field value="test" :index="1" />
+        Test checkbox label
+      </input-label>
+      <input-label isWrapper>
+        <checkbox-field value="test2" :index="2" />
+        Test checkbox label 2
+      </input-label>
+      <input-error />
+    </headless-input>
+
+    <headless-input element="fieldset" v-model="testData.input5" rules="required">
+      <input-label text="Test Label" element="legend" />
+      <input-label isWrapper>
+        <checkbox-field value="test" :index="1" />
+        Test checkbox truthy/falsy
+      </input-label>
+      <input-error />
+    </headless-input>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from "vue";
-// Uncomment import and local "components" registration if library is not registered globally.
-// import { VueHeadlessUiSample } from '@/entry.esm';
+import { defineComponent, reactive } from "vue";
 
 export default defineComponent({
-  components: {},
   name: "ServeDev",
-  // components: {
-  //  VueHeadlessUiSample,
-  // }
+  components: {},
   setup() {
-    const model = ref("");
-    const model2 = ref("");
+    const testData = reactive({
+      input1: null,
+      input2: null,
+      input3: null,
+      input4: [],
+      input5: null,
+    });
+
     return {
-      model,
-      model2,
+      testData,
     };
   },
 });
