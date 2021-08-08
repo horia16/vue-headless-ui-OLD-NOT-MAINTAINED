@@ -8,3 +8,4 @@ export { default as CheckboxField } from "./form/HeadlessInput/fields/CheckboxFi
 export { default as InputError } from "./form/HeadlessInput/elements/InputError.vue";
 export { default as InputLabel } from "./form/HeadlessInput/elements/InputLabel.vue";
 export { default as HeadlessForm } from "./form/HeadlessForm/HeadlessForm.vue";
+export { default as HeadlessIcon } from "./user-interface/HeadlessIcon.vue";
