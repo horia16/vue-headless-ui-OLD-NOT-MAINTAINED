@@ -145,12 +145,59 @@
       >"
       />
     </div>
+
+    <headless-accordion self>
+      <accordion-header #default="{toggle}" style="display:flex;border:1px solid black">
+        <button @click="toggle">Toggle</button>
+      </accordion-header>
+      <accordion-content style="border:1px solid black">
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+      </accordion-content>
+    </headless-accordion>
+    <headless-accordion self openOnCreate>
+      <accordion-header #default="{toggle}" style="display:flex;border:1px solid black">
+        <button @click="toggle">Toggle</button>
+      </accordion-header>
+      <accordion-content style="border:1px solid black">
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+      </accordion-content>
+    </headless-accordion>
+    <h1>Content Smootness test</h1>
   </div>
 </template>
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
 
 export default defineComponent({
+  components: {},
   name: "ServeDev",
   setup() {
     const testData = reactive({

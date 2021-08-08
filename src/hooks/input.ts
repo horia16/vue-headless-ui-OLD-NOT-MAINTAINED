@@ -60,8 +60,6 @@ export function useInput(props: InputBaseProps, context: SetupContext<any>) {
     await validate();
     context.emit("blur");
   }
-
-  // If we have a value upon setup validate it
   if (props.modelValue) {
     value.value = props.modelValue;
     if (Array.isArray(value.value)) {
