@@ -4,7 +4,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, onBeforeUnmount, Ref, ref } from "vue";
+import { defineComponent, onMounted, Ref, ref } from "vue";
 
 export default defineComponent({
   name: "AccordionContentWrapper",
@@ -14,9 +14,6 @@ export default defineComponent({
       if (content.value) {
         context.emit("mounted", content.value.scrollHeight);
       }
-    });
-    onBeforeUnmount(() => {
-      context.emit("unmounted");
     });
     return {
       content,

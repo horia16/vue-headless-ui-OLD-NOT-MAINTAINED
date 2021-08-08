@@ -11,11 +11,15 @@ export default defineComponent({
   props: {
     modelValue: { type: Boolean, default: null },
     self: { type: Boolean, default: false },
-    openOnCreate: { type: Boolean, default: false },
+    openByDefault: { type: Boolean, default: false },
+    animationDelay: { type: Number, default: 700 },
   },
   setup(props, context) {
-    const selfOpen = ref(props.openOnCreate ? true : false);
-    if (props.openOnCreate == true && props.modelValue == false) {
+    const selfOpen = ref(props.openByDefault ? true : false);
+
+    // If we are open by default and the v-model is set to false make it true
+    //! This will still trigger the animation delay as of now because we are updating a proxy async and the initial state has been loaded already
+    if (props.openByDefault == true && props.modelValue == false) {
       context.emit("update:modelValue", true);
     }
 
@@ -26,7 +30,10 @@ export default defineComponent({
     function toggle() {
       isOpen.value = !isOpen.value;
     }
-
+    provide(
+      "delay",
+      computed(() => props.animationDelay)
+    );
     provide("isOpen", isOpen);
     provide("toggle", toggle);
   },

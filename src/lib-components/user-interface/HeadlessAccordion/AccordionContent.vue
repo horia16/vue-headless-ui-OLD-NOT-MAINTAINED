@@ -9,15 +9,14 @@
   </accordion-content-wrapper>
 </template>
 <script lang="ts">
-import { defineComponent, inject, Ref, ref, watchEffect, WritableComputedRef } from "vue";
+import { ComputedRef, defineComponent, inject, Ref, ref, watchEffect, WritableComputedRef } from "vue";
 import AccordionContentWrapper from "./AccordionContentWrapper.vue";
 
 export default defineComponent({
   components: { AccordionContentWrapper },
   name: "AccordionContent",
   setup() {
-    const delay = ref(700);
-
+    const delay = inject("delay") as ComputedRef<number>;
     const isOpen = inject("isOpen") as WritableComputedRef<boolean>;
     const toggle = inject("toggle") as () => void;
 

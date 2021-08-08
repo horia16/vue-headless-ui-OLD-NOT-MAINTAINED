@@ -3,7 +3,7 @@
     <h1>
       Inputs Test
     </h1>
-    <headless-form @valid="testSubmit" @error="testError">
+    <headless-form @valid="testSubmit" @error="testError" scrollToError>
       <headless-input v-model="testData.input1" rules="required">
         <input-label text="Test Label" />
         <input-field />
@@ -168,7 +168,7 @@
         <div>Content</div>
       </accordion-content>
     </headless-accordion>
-    <headless-accordion self openOnCreate>
+    <headless-accordion self openByDefault>
       <accordion-header #default="{toggle}" style="display:flex;border:1px solid black">
         <button @click="toggle">Toggle</button>
       </accordion-header>
@@ -190,7 +190,28 @@
         <div>Content</div>
       </accordion-content>
     </headless-accordion>
-    <h1>Content Smootness test</h1>
+    <headless-accordion v-model="testData.accordion">
+      <accordion-header #default="{toggle}" style="display:flex;border:1px solid black">
+        <button @click="toggle">Toggle</button>
+      </accordion-header>
+      <accordion-content style="border:1px solid black">
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+      </accordion-content>
+    </headless-accordion>
   </div>
 </template>
 <script lang="ts">
@@ -209,6 +230,7 @@ export default defineComponent({
       input6: null,
       dynamicRadio: null,
       dynamicCheckbox: [],
+      accordion: false,
     });
 
     function testSubmit() {
