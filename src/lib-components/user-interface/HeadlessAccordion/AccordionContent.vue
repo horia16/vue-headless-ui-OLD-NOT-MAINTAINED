@@ -1,5 +1,7 @@
 <template>
   <accordion-content-wrapper
+    :id="accordionId"
+    role="region"
     ref="wrapper"
     @mounted="contentMounted"
     :style="{ height: height != null ? `${height}px` : 'auto', overflow, transition: `height ${delay}ms` }"
@@ -19,7 +21,7 @@ export default defineComponent({
     const delay = inject("delay") as ComputedRef<number>;
     const isOpen = inject("isOpen") as WritableComputedRef<boolean>;
     const toggle = inject("toggle") as () => void;
-
+    const accordionId = inject("accordionId") as ComputedRef<string>;
     const wrapper: Ref<{ $el: HTMLElement } | null> = ref(null);
 
     const visible = ref(isOpen.value ? true : false);
@@ -88,6 +90,7 @@ export default defineComponent({
       overflow,
       visible,
       delay,
+      accordionId,
     };
   },
 });

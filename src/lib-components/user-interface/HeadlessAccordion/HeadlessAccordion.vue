@@ -4,6 +4,7 @@
   </div>
 </template>
 <script lang="ts">
+import { randomString } from "@/utils";
 import { computed, defineComponent, provide, ref } from "vue";
 
 export default defineComponent({
@@ -13,10 +14,13 @@ export default defineComponent({
     self: { type: Boolean, default: false },
     openByDefault: { type: Boolean, default: false },
     animationDelay: { type: Number, default: 700 },
+    id: { type: [String, Number], default: null },
   },
   setup(props, context) {
     const selfOpen = ref(props.openByDefault ? true : false);
-
+    const accordionId = computed(() => {
+      return props.id ? `${props.id}` : `accordion-${randomString()}`;
+    });
     // If we are open by default and the v-model is set to false make it true
     //! This will still trigger the animation delay as of now because we are updating a proxy async and the initial state has been loaded already
     if (props.openByDefault == true && props.modelValue == false) {
@@ -36,6 +40,7 @@ export default defineComponent({
     );
     provide("isOpen", isOpen);
     provide("toggle", toggle);
+    provide("accordionId", accordionId);
   },
 });
 </script>

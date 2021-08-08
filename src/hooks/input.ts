@@ -1,5 +1,6 @@
 import { SetupContext, computed, ComputedRef, Ref } from "vue";
 import { useField } from "vee-validate";
+import { randomString } from "@/utils";
 export interface InputBaseProps {
   modelValue: string | number | boolean | Array<any> | null;
   id: string | number | null;
@@ -29,9 +30,7 @@ export interface FieldData {
 
 export function useInput(props: InputBaseProps, context: SetupContext<any>) {
   // Use the provided id otherwise generate a random one
-  const inputId = props.id
-    ? `${props.id}`
-    : `input-${[...Array(30)].map(() => Math.random().toString(36)[2]).join("")}`;
+  const inputId = props.id ? `${props.id}` : `input-${randomString()}`;
 
   // Use the provided name or generate one based on the id
   const inputName = props.name ? `${props.name}` : `${inputId}-name`;
