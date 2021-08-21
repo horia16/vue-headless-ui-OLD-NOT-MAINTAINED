@@ -23,7 +23,34 @@
    <span>
    <img alt="Code Grade" src="https://www.code-inspector.com/project/26676/status/svg" >
   </span>
+   <span>
+   <img alt="Downloads" src="https://img.shields.io/github/downloads/horia16/vue-headless-ui/total.svg" >
+  </span>
+ 
 <div>
+  
+<div>
+  <span>
+   <img alt="License" src="https://img.shields.io/github/license/horia16/vue-headless-ui.svg" >
+  </span>
+
+  <span>
+   <img alt="Version" src="https://badgen.net/npm/v/vue-headless-ui" >
+  </span>
+  <span>
+   <img alt="Types" src="https://badgen.net/npm/types/vue-headless-ui" >
+  </span>
+ 
+<div>
+  <div>
+   <span>
+   <img alt="Vue 3" src="https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vue.js&logoColor=4FC08D" >
+  </span>
+     <span>
+   <img alt="Typescript" src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" >
+  </span>
+  </div>
+ 
 
 Vue Headless UI is a MIT licensed project that is developed and maintained by Ioan-Horia Rotaru.
 
