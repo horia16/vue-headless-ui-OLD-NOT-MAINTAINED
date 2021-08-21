@@ -16,7 +16,14 @@
 
 ## DO NOT USE IN PRODUCTION!
 
-  
+<div>
+  <span>
+   <img alt="Code quality" src="https://www.code-inspector.com/project/26676/score/svg" >
+  </span>
+   <span>
+   <img alt="Code Grade" src="https://www.code-inspector.com/project/26676/status/svg" >
+  </span>
+<div>
 
 Vue Headless UI is a MIT licensed project that is developed and maintained by Ioan-Horia Rotaru.
 
