@@ -9,6 +9,7 @@ const install: Exclude<Plugin["install"], undefined> = function installVueHeadle
 };
 
 export default install;
-export * from "@/lib-components/index";
 
-export { defineRule } from "vee-validate";
+export * from "@/utils";
+export * from "@/lib-components/index";
+export * from "vee-validate";

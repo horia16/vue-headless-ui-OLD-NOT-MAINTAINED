@@ -145,7 +145,9 @@
       >"
       />
     </div>
-
+    <h1>
+      Accordion tests
+    </h1>
     <headless-accordion self>
       <accordion-header #default="{toggle}" style="display:flex;border:1px solid black">
         <button @click="toggle">Toggle</button>
@@ -212,6 +214,72 @@
         <div>Content</div>
       </accordion-content>
     </headless-accordion>
+
+    <h1>
+      Dialog tests
+    </h1>
+    <headless-button @click="testData.dialogOpen = true">
+      Open Dialog
+    </headless-button>
+    <headless-dialog
+      v-model="testData.dialogOpen"
+      style="background-color:#00000080;display:flex; justify-content:center; align-items:center;"
+    >
+      <dialog-content style="background-color:#fff">
+        <headless-button @click="testData.dialogOpen = false">
+          Close Dialog
+        </headless-button>
+        <div>
+          Example text
+        </div>
+        <headless-button>
+          dummy
+        </headless-button>
+        <headless-button>
+          dummy2
+        </headless-button>
+        <headless-button>
+          dummy3
+        </headless-button>
+        <div>
+          Test dynamic content
+        </div>
+        <headless-accordion self>
+          <accordion-header #default="{toggle}" style="display:flex;border:1px solid black">
+            <button @click="toggle">Toggle</button>
+          </accordion-header>
+          <accordion-content style="border:1px solid black">
+            <div>Content</div>
+            <div>Content</div>
+            <headless-button>
+              dummy
+            </headless-button>
+            <headless-button>
+              dummy2
+            </headless-button>
+            <headless-button>
+              dummy3
+            </headless-button>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <headless-button @click="testData.dialogOpen2 = true">
+              Open 2nd dialog
+            </headless-button>
+            <headless-dialog
+              v-model="testData.dialogOpen2"
+              style="background-color:#00000080;display:flex; justify-content:center; align-items:center;"
+            >
+              <dialog-content style="background-color:#fff">
+                <headless-button @click="testData.dialogOpen2 = false">
+                  Close 2nd dialog
+                </headless-button>
+              </dialog-content>
+            </headless-dialog>
+          </accordion-content>
+        </headless-accordion>
+      </dialog-content>
+    </headless-dialog>
   </div>
 </template>
 <script lang="ts">
@@ -231,6 +299,8 @@ export default defineComponent({
       dynamicRadio: null,
       dynamicCheckbox: [],
       accordion: false,
+      dialogOpen: false,
+      dialogOpen2: false,
     });
 
     function testSubmit() {

@@ -13,8 +13,19 @@ export { default as HeadlessForm } from "./form/HeadlessForm/HeadlessForm.vue";
 
 // UI stuff
 export { default as HeadlessIcon } from "./user-interface/HeadlessIcon.vue";
+
+// Accordion
 export { default as HeadlessAccordion } from "./user-interface/HeadlessAccordion/HeadlessAccordion.vue";
 export { default as AccordionContent } from "./user-interface/HeadlessAccordion/AccordionContent.vue";
 export { default as AccordionHeader } from "./user-interface/HeadlessAccordion/AccordionHeader.vue";
+
+// Buttons
 export { default as HeadlessButton } from "./user-interface/HeadlessButton/HeadlessButton.vue";
+
+// Dialog/Modal
 export { default as HeadlessDialog } from "./user-interface/HeadlessDialog/HeadlessDialog.vue";
+export { default as DialogContent } from "./user-interface/HeadlessDialog/DialogContent.vue";
+
+//Utility
+
+export { default as DomObserver } from "./utility/DomObserver.vue";
