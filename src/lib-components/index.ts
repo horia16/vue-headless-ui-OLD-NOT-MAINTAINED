@@ -26,6 +26,10 @@ export { default as HeadlessButton } from "./user-interface/HeadlessButton/Headl
 export { default as HeadlessDialog } from "./user-interface/HeadlessDialog/HeadlessDialog.vue";
 export { default as DialogContent } from "./user-interface/HeadlessDialog/DialogContent.vue";
 
-//Utility
+// Tabs
+export { default as HeadlessTabs } from "./user-interface/HeadlessTabs/HeadlessTabs.vue";
+export { default as HeadlessTab } from "./user-interface/HeadlessTabs/HeadlessTab.vue";
+export { default as TabSwitch } from "./user-interface/HeadlessTabs/TabSwitch.vue";
 
+//Utility
 export { default as DomObserver } from "./utility/DomObserver.vue";

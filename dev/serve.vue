@@ -1,122 +1,140 @@
 <template>
   <div>
-    <h1>
-      Inputs Test
-    </h1>
-    <headless-form @valid="testSubmit" @error="testError" scrollToError>
-      <headless-input v-model="testData.input1" rules="required">
-        <input-label text="Test Label" />
-        <input-field />
-        <input-error />
-      </headless-input>
+    <headless-tabs
+      v-model="testData.tab"
+      :tabs="[{ name: 'Inputs' }, { name: 'Icons' }, { name: 'Accordions' }, { name: 'Dialogs' }]"
+    >
+      <div style="display: flex; gap: 1rem; flex-wrap:wrap">
+        <tab-switch #default="{index, currentTab, switchTab, data}">
+          <button
+            :style="{ backgroundColor: index == currentTab ? 'blue' : '', padding: '1rem', width: '8rem' }"
+            @click="switchTab(index)"
+          >
+            {{ data.name }}
+          </button>
+        </tab-switch>
+      </div>
 
-      <headless-input v-model="testData.input2" rules="required">
-        <input-label text="Test Label" />
-        <select-field
-          :options="[
-            { name: 'test', value: 'test' },
-            { name: 'test2', value: 'test2' },
-          ]"
-        />
-        <input-error />
-      </headless-input>
+      <headless-tab>
+        <h1>
+          Inputs Test
+        </h1>
+        <headless-form @valid="testSubmit" @error="testError" scrollToError>
+          <headless-input v-model="testData.input1" rules="required">
+            <input-label text="Test Label" />
+            <input-field />
+            <input-error />
+          </headless-input>
 
-      <headless-input element="fieldset" v-model="testData.input3" rules="required">
-        <input-label text="Test Label" element="legend" />
-        <input-label isWrapper>
-          <radio-field value="test" :index="1" />
-          Test label
-        </input-label>
-        <input-label isWrapper>
-          <radio-field value="test2" :index="2" />
-          Test label 2
-        </input-label>
-        <input-error />
-      </headless-input>
+          <headless-input v-model="testData.input2" rules="required">
+            <input-label text="Test Label" />
+            <select-field
+              :options="[
+                { name: 'test', value: 'test' },
+                { name: 'test2', value: 'test2' },
+              ]"
+            />
+            <input-error />
+          </headless-input>
 
-      <headless-input element="fieldset" v-model="testData.input4" rules="required">
-        <input-label text="Test Label" element="legend" />
-        <input-label isWrapper>
-          <checkbox-field value="test" :index="1" />
-          Test checkbox label
-        </input-label>
-        <input-label isWrapper>
-          <checkbox-field value="test2" :index="2" />
-          Test checkbox label 2
-        </input-label>
-        <input-error />
-      </headless-input>
+          <headless-input element="fieldset" v-model="testData.input3" rules="required">
+            <input-label text="Test Label" element="legend" />
+            <input-label isWrapper>
+              <radio-field value="test" :index="1" />
+              Test label
+            </input-label>
+            <input-label isWrapper>
+              <radio-field value="test2" :index="2" />
+              Test label 2
+            </input-label>
+            <input-error />
+          </headless-input>
 
-      <headless-input element="fieldset" v-model="testData.input5" rules="required">
-        <input-label text="Test Label" element="legend" />
-        <input-label isWrapper>
-          <checkbox-field value="test" :index="1" />
-          Test checkbox truthy/falsy
-        </input-label>
-        <input-error />
-      </headless-input>
+          <headless-input element="fieldset" v-model="testData.input4" rules="required">
+            <input-label text="Test Label" element="legend" />
+            <input-label isWrapper>
+              <checkbox-field value="test" :index="1" />
+              Test checkbox label
+            </input-label>
+            <input-label isWrapper>
+              <checkbox-field value="test2" :index="2" />
+              Test checkbox label 2
+            </input-label>
+            <input-error />
+          </headless-input>
 
-      <headless-input v-model="testData.input6" rules="required">
-        <input-label text="Test Label" />
-        <textarea-field />
-        <input-error />
-      </headless-input>
+          <headless-input element="fieldset" v-model="testData.input5" rules="required">
+            <input-label text="Test Label" element="legend" />
+            <input-label isWrapper>
+              <checkbox-field value="test" :index="1" />
+              Test checkbox truthy/falsy
+            </input-label>
+            <input-error />
+          </headless-input>
 
-      <h1>
-        Dynamic Inputs Test
-      </h1>
-      <headless-input element="fieldset" v-model="testData.dynamicRadio" rules="required">
-        <input-label text="Test Label" element="legend" />
-        <input-label
-          isWrapper
-          v-for="(option, index) in [
-            { name: 'test', value: 'test' },
-            { name: 'test2', value: 'test2' },
-            { name: 'test3', value: 'test3' },
-            { name: 'test4', value: 'test4' },
-          ]"
-          :key="index"
-        >
-          <radio-field :value="option.value" :index="index" />
-          {{ option.name }}
-        </input-label>
-        <input-error />
-      </headless-input>
-      <headless-input element="fieldset" v-model="testData.dynamicCheckbox" rules="required">
-        <input-label text="Test Label" element="legend" />
-        <input-label
-          isWrapper
-          v-for="(option, index) in [
-            { name: 'test', value: 'test' },
-            { name: 'test2', value: 'test2' },
-            { name: 'test3', value: 'test3' },
-            { name: 'test4', value: 'test4' },
-          ]"
-          :key="index"
-        >
-          <checkbox-field :value="option.value" :index="index" />
-          {{ option.name }}
-        </input-label>
-        <input-error />
-      </headless-input>
-      <button>Submit</button>
-    </headless-form>
-    <h1>
-      Icon Test
-    </h1>
-    <div>
-      <h4>Iconify</h4>
-      <headless-icon name="noto:test-tube" iconify />
-    </div>
-    <div>
-      <h4>Font Icon</h4>
-      <headless-icon name="mdi mdi-home" font />
-    </div>
-    <div>
-      <h4>Inline Svg</h4>
-      <headless-icon
-        name="alien"
-        html="<svg
+          <headless-input v-model="testData.input6" rules="required">
+            <input-label text="Test Label" />
+            <textarea-field />
+            <input-error />
+          </headless-input>
+
+          <h1>
+            Dynamic Inputs Test
+          </h1>
+          <headless-input element="fieldset" v-model="testData.dynamicRadio" rules="required">
+            <input-label text="Test Label" element="legend" />
+            <input-label
+              isWrapper
+              v-for="(option, index) in [
+                { name: 'test', value: 'test' },
+                { name: 'test2', value: 'test2' },
+                { name: 'test3', value: 'test3' },
+                { name: 'test4', value: 'test4' },
+              ]"
+              :key="index"
+            >
+              <radio-field :value="option.value" :index="index" />
+              {{ option.name }}
+            </input-label>
+            <input-error />
+          </headless-input>
+          <headless-input element="fieldset" v-model="testData.dynamicCheckbox" rules="required">
+            <input-label text="Test Label" element="legend" />
+            <input-label
+              isWrapper
+              v-for="(option, index) in [
+                { name: 'test', value: 'test' },
+                { name: 'test2', value: 'test2' },
+                { name: 'test3', value: 'test3' },
+                { name: 'test4', value: 'test4' },
+              ]"
+              :key="index"
+            >
+              <checkbox-field :value="option.value" :index="index" />
+              {{ option.name }}
+            </input-label>
+            <input-error />
+          </headless-input>
+          <button>Submit</button>
+        </headless-form>
+      </headless-tab>
+      <headless-tab>
+        <h1>
+          Icon Test
+        </h1>
+        <div>
+          <h4>Iconify</h4>
+          <headless-icon name="noto:test-tube" iconify />
+        </div>
+        <div>
+          <h4>Font Icon</h4>
+          <headless-icon name="mdi mdi-home" font />
+        </div>
+        <div>
+          <h4>Inline Svg</h4>
+          <headless-icon
+            name="alien"
+            html="<svg
         xmlns='http://www.w3.org/2000/svg'
         xmlns:xlink='http://www.w3.org/1999/xlink'
         aria-hidden='true'
@@ -143,107 +161,12 @@
           d='M37 64.5c-3.2 0-6-1.6-7.6-4.3c-.2-.4-.2-.8 0-1.2c.2-.4.6-.6 1.1-.6h13.2c.4 0 .8.2 1.1.6c.2.4.2.8 0 1.2c-1.8 2.7-4.7 4.3-7.8 4.3z'
         /></svg
       >"
-      />
-    </div>
-    <h1>
-      Accordion tests
-    </h1>
-    <headless-accordion self>
-      <accordion-header #default="{toggle}" style="display:flex;border:1px solid black">
-        <button @click="toggle">Toggle</button>
-      </accordion-header>
-      <accordion-content style="border:1px solid black">
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-      </accordion-content>
-    </headless-accordion>
-    <headless-accordion self openByDefault>
-      <accordion-header #default="{toggle}" style="display:flex;border:1px solid black">
-        <button @click="toggle">Toggle</button>
-      </accordion-header>
-      <accordion-content style="border:1px solid black">
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-      </accordion-content>
-    </headless-accordion>
-    <headless-accordion v-model="testData.accordion">
-      <accordion-header #default="{toggle}" style="display:flex;border:1px solid black">
-        <button @click="toggle">Toggle</button>
-      </accordion-header>
-      <accordion-content style="border:1px solid black">
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-      </accordion-content>
-    </headless-accordion>
-
-    <h1>
-      Dialog tests
-    </h1>
-    <headless-button @click="testData.dialogOpen = true">
-      Open Dialog
-    </headless-button>
-    <headless-dialog
-      v-model="testData.dialogOpen"
-      style="background-color:#00000080;display:flex; justify-content:center; align-items:center;"
-    >
-      <dialog-content style="background-color:#fff">
-        <headless-button @click="testData.dialogOpen = false">
-          Close Dialog
-        </headless-button>
-        <div>
-          Example text
-        </div>
-        <headless-button>
-          dummy
-        </headless-button>
-        <headless-button>
-          dummy2
-        </headless-button>
-        <headless-button>
-          dummy3
-        </headless-button>
-        <div>
-          Test dynamic content
-        </div>
+          /></div
+      ></headless-tab>
+      <headless-tab>
+        <h1>
+          Accordion tests
+        </h1>
         <headless-accordion self>
           <accordion-header #default="{toggle}" style="display:flex;border:1px solid black">
             <button @click="toggle">Toggle</button>
@@ -251,6 +174,84 @@
           <accordion-content style="border:1px solid black">
             <div>Content</div>
             <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+          </accordion-content>
+        </headless-accordion>
+        <headless-accordion self openByDefault>
+          <accordion-header #default="{toggle}" style="display:flex;border:1px solid black">
+            <button @click="toggle">Toggle</button>
+          </accordion-header>
+          <accordion-content style="border:1px solid black">
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+          </accordion-content>
+        </headless-accordion>
+        <headless-accordion v-model="testData.accordion">
+          <accordion-header #default="{toggle}" style="display:flex;border:1px solid black">
+            <button @click="toggle">Toggle3</button>
+          </accordion-header>
+          <accordion-content style="border:1px solid black">
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+          </accordion-content>
+        </headless-accordion>
+      </headless-tab>
+      <headless-tab>
+        <h1>
+          Dialog tests
+        </h1>
+        <headless-button @click="testData.dialogOpen = true">
+          Open Dialog
+        </headless-button>
+        <headless-dialog
+          v-model="testData.dialogOpen"
+          style="background-color:#00000080;display:flex; justify-content:center; align-items:center;"
+        >
+          <dialog-content style="background-color:#fff">
+            <headless-button @click="testData.dialogOpen = false">
+              Close Dialog
+            </headless-button>
+            <div>
+              Example text
+            </div>
             <headless-button>
               dummy
             </headless-button>
@@ -260,26 +261,47 @@
             <headless-button>
               dummy3
             </headless-button>
-            <div>Content</div>
-            <div>Content</div>
-            <div>Content</div>
-            <headless-button @click="testData.dialogOpen2 = true">
-              Open 2nd dialog
-            </headless-button>
-            <headless-dialog
-              v-model="testData.dialogOpen2"
-              style="background-color:#00000080;display:flex; justify-content:center; align-items:center;"
-            >
-              <dialog-content style="background-color:#fff">
-                <headless-button @click="testData.dialogOpen2 = false">
-                  Close 2nd dialog
+            <div>
+              Test dynamic content
+            </div>
+            <headless-accordion self>
+              <accordion-header #default="{toggle}" style="display:flex;border:1px solid black">
+                <button @click="toggle">Toggle</button>
+              </accordion-header>
+              <accordion-content style="border:1px solid black">
+                <div>Content</div>
+                <div>Content</div>
+                <headless-button>
+                  dummy
                 </headless-button>
-              </dialog-content>
-            </headless-dialog>
-          </accordion-content>
-        </headless-accordion>
-      </dialog-content>
-    </headless-dialog>
+                <headless-button>
+                  dummy2
+                </headless-button>
+                <headless-button>
+                  dummy3
+                </headless-button>
+                <div>Content</div>
+                <div>Content</div>
+                <div>Content</div>
+                <headless-button @click="testData.dialogOpen2 = true">
+                  Open 2nd dialog
+                </headless-button>
+                <headless-dialog
+                  v-model="testData.dialogOpen2"
+                  style="background-color:#00000080;display:flex; justify-content:center; align-items:center;"
+                >
+                  <dialog-content style="background-color:#fff">
+                    <headless-button @click="testData.dialogOpen2 = false">
+                      Close 2nd dialog
+                    </headless-button>
+                  </dialog-content>
+                </headless-dialog>
+              </accordion-content>
+            </headless-accordion>
+          </dialog-content>
+        </headless-dialog>
+      </headless-tab>
+    </headless-tabs>
   </div>
 </template>
 <script lang="ts">
@@ -290,6 +312,7 @@ export default defineComponent({
   name: "ServeDev",
   setup() {
     const testData = reactive({
+      tab: 0,
       input1: null,
       input2: null,
       input3: null,
