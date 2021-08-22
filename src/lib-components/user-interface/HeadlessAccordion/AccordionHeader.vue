@@ -4,15 +4,17 @@
   </div>
 </template>
 <script lang="ts">
-import { ComputedRef, defineComponent, inject, WritableComputedRef } from "vue";
+import { injectionKeys, isMissingInjectable } from "@/utils";
+
+import { defineComponent, inject } from "vue";
 
 export default defineComponent({
   name: "AccordionHeader",
   setup() {
-    const isOpen = inject("isOpen") as WritableComputedRef<boolean>;
-    const accordionId = inject("accordionId") as ComputedRef<string>;
-    const toggle = inject("toggle") as () => void;
-
+    const isOpen = inject(injectionKeys.ACCORDION.IS_OPEN);
+    const accordionId = inject(injectionKeys.ACCORDION.COMPUTED_ID);
+    const toggle = inject(injectionKeys.ACCORDION.TOGGLE);
+    isMissingInjectable(isOpen, accordionId, toggle);
     return {
       isOpen,
       toggle,

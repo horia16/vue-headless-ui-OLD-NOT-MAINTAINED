@@ -4,7 +4,7 @@
   </div>
 </template>
 <script lang="ts">
-import { randomString } from "@/utils";
+import { injectionKeys, randomString } from "@/utils";
 import { computed, defineComponent, provide, ref } from "vue";
 
 export default defineComponent({
@@ -21,6 +21,7 @@ export default defineComponent({
     const accordionId = computed(() => {
       return props.id ? `${props.id}` : `accordion-${randomString()}`;
     });
+    const delay = computed(() => props.animationDelay);
     // If we are open by default and the v-model is set to false make it true
     //! This will still trigger the animation delay as of now because we are updating a proxy async and the initial state has been loaded already
     if (props.openByDefault == true && props.modelValue == false) {
@@ -34,13 +35,11 @@ export default defineComponent({
     function toggle() {
       isOpen.value = !isOpen.value;
     }
-    provide(
-      "delay",
-      computed(() => props.animationDelay)
-    );
-    provide("isOpen", isOpen);
-    provide("toggle", toggle);
-    provide("accordionId", accordionId);
+
+    provide(injectionKeys.ACCORDION.DELAY, delay);
+    provide(injectionKeys.ACCORDION.IS_OPEN, isOpen);
+    provide(injectionKeys.ACCORDION.TOGGLE, toggle);
+    provide(injectionKeys.ACCORDION.COMPUTED_ID, accordionId);
   },
 });
 </script>

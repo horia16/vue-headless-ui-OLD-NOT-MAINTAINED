@@ -11,22 +11,25 @@
   </accordion-content-wrapper>
 </template>
 <script lang="ts">
-import { ComputedRef, defineComponent, inject, Ref, ref, watchEffect, WritableComputedRef } from "vue";
+import { injectionKeys, isMissingInjectable } from "@/utils";
+import { defineComponent, inject, Ref, ref, watchEffect } from "vue";
 import AccordionContentWrapper from "./AccordionContentWrapper.vue";
 
 export default defineComponent({
   components: { AccordionContentWrapper },
   name: "AccordionContent",
   setup() {
-    const delay = inject("delay") as ComputedRef<number>;
-    const isOpen = inject("isOpen") as WritableComputedRef<boolean>;
-    const toggle = inject("toggle") as () => void;
-    const accordionId = inject("accordionId") as ComputedRef<string>;
+    const delay = inject(injectionKeys.ACCORDION.DELAY);
+    const isOpen = inject(injectionKeys.ACCORDION.IS_OPEN);
+    const accordionId = inject(injectionKeys.ACCORDION.COMPUTED_ID);
+    const toggle = inject(injectionKeys.ACCORDION.TOGGLE);
+    isMissingInjectable(delay, isOpen, accordionId, toggle);
+
     const wrapper: Ref<{ $el: HTMLElement } | null> = ref(null);
 
-    const visible = ref(isOpen.value ? true : false);
+    const visible = ref(isOpen?.value ? true : false);
 
-    const height: Ref<number | null> = ref(isOpen.value ? null : 0);
+    const height: Ref<number | null> = ref(isOpen?.value ? null : 0);
     const overflow = ref("hidden");
 
     let zeroOutHeightTimeout: NodeJS.Timeout | null = null;
@@ -48,18 +51,18 @@ export default defineComponent({
       height.value = 0;
       overflow.value = "hidden";
       // Remove the content completely from the dom after the animation has been completed.
-      setInvisibleTimeout = setTimeout(setInvisible, delay.value);
+      setInvisibleTimeout = setTimeout(setInvisible, delay?.value);
     }
 
     function contentMounted(scrollHeight: number) {
       height.value = scrollHeight;
       // Set the height to auto after the animation has been finished.
-      setHeightAutoTimeout = setTimeout(setHeightAuto, delay.value);
+      setHeightAutoTimeout = setTimeout(setHeightAuto, delay?.value);
     }
 
     watchEffect(() => {
       // We are opening the accordion
-      if (isOpen.value) {
+      if (isOpen?.value) {
         // If we have any timeout set for closing the accordion, i.e. opening it while the closing animation did not finish,  clear them
         if (setInvisibleTimeout) clearTimeout(setInvisibleTimeout);
         if (zeroOutHeightTimeout) clearTimeout(zeroOutHeightTimeout);
