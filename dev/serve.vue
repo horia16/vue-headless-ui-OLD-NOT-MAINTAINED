@@ -1,22 +1,25 @@
 <template>
   <div>
     <headless-tabs v-model="testData.tab">
-      <headless-tab-switch>
-        Switch to tab 1
-      </headless-tab-switch>
-      <headless-tab-switch>
-        Switch to tab 2
-      </headless-tab-switch>
-      <headless-tab-switch>
-        Switch to tab 3
-      </headless-tab-switch>
+      <headless-tab-switches>
+        <headless-tab-switch>
+          Switch to tab 1
+        </headless-tab-switch>
+        <headless-tab-switch>
+          Switch to tab 2
+        </headless-tab-switch>
+        <headless-tab-switch>
+          Switch to tab 3
+        </headless-tab-switch>
+      </headless-tab-switches>
       <headless-tab>1</headless-tab>
       <headless-tab>2</headless-tab>
       <headless-tab>3</headless-tab>
     </headless-tabs>
     <headless-tabs v-model="testData.tab2">
-      <headless-tab-switch v-for="x in 6" :key="x"> Switch to tab {{ x }} </headless-tab-switch>
-
+      <headless-tab-switches>
+        <headless-tab-switch v-for="x in 6" :key="x"> Switch to tab {{ x }} </headless-tab-switch>
+      </headless-tab-switches>
       <headless-tab
         v-for="x in 6"
         :key="x"
@@ -31,7 +34,6 @@
 import { defineComponent, reactive } from "vue";
 
 export default defineComponent({
-  components: {},
   name: "ServeDev",
   setup() {
     const testData = reactive({

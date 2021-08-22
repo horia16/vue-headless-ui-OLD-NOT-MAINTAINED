@@ -1,25 +1,75 @@
 <template>
-  <button type="button" @click="switchTab(index)">
+  <button
+    ref="switchButton"
+    type="button"
+    @click="switchTab(index)"
+    @keydown="onKeyDown"
+    role="tab"
+    :id="id"
+    :aria-selected="index == currentTab"
+    :tabindex="index != currentTab ? '-1' : null"
+    :aria-controls="tabs[index]"
+  >
     <slot :index="index" :currentTab="currentTab" :switchTab="switchTab" />
   </button>
 </template>
 <script lang="ts">
 import { useTabLink } from "@/hooks/tabs";
 import { injectionKeys, isMissingInjectable } from "@/utils";
-import { defineComponent, inject } from "vue";
+import { defineComponent, inject, Ref, ref, watchEffect } from "vue";
 
 export default defineComponent({
   name: "HeadlessTabSwitch",
   inheritAttrs: false,
   setup() {
+    const switchButton: Ref<HTMLButtonElement | null> = ref(null);
     const switches = inject(injectionKeys.TABS.SWITCH_ARRAY);
+    const tabs = inject(injectionKeys.TABS.TAB_ARRAY);
     const currentTab = inject(injectionKeys.TABS.CURRENT_TAB);
     const switchTab = inject(injectionKeys.TABS.SWITCH_TAB);
-    isMissingInjectable(switches, currentTab, switchTab);
+    isMissingInjectable(switches, tabs, currentTab, switchTab);
+    function onKeyDown(e: KeyboardEvent) {
+      if (currentTab && switches && switchTab) {
+        switch (e.key) {
+          case "ArrowRight":
+            if (currentTab.value + 1 <= switches.value.length - 1) {
+              switchTab(currentTab.value + 1);
+            } else {
+              switchTab(0);
+            }
+            break;
+          case "ArrowLeft":
+            if (currentTab.value - 1 >= 0) {
+              switchTab(currentTab.value - 1);
+            } else {
+              switchTab(switches.value.length - 1);
+            }
+            break;
+          case "Home":
+            switchTab(0);
+            break;
+          case "End":
+            switchTab(switches.value.length - 1);
+            break;
 
-    const { index } = useTabLink(switches);
+          default:
+            break;
+        }
+      }
+    }
 
-    return { currentTab, index, switchTab };
+    const { id, index } = useTabLink(switches);
+
+    watchEffect(() => {
+      if (currentTab?.value == index.value) {
+        // Get the focus only if we move from another tab button
+        if (switchButton.value && document.activeElement?.getAttribute("role") == "tab") {
+          switchButton.value.focus();
+        }
+      }
+    });
+
+    return { currentTab, index, id, switchTab, onKeyDown, switchButton, tabs };
   },
 });
 </script>
