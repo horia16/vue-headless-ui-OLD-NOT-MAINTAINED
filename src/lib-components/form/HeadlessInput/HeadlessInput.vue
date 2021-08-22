@@ -6,6 +6,7 @@
 <script lang="ts">
 import { defineComponent, PropType, provide } from "vue";
 import { useInput, InputBaseProps } from "../../../hooks/input";
+import { injectionKeys } from "@/utils";
 export default defineComponent({
   name: "HeadlessInput",
   props: {
@@ -27,14 +28,15 @@ export default defineComponent({
       props as InputBaseProps,
       context
     );
-    provide("errorMessage", errorMessage);
-    provide("inputValue", inputValue);
-    provide("name", inputName);
-    provide("id", inputId);
-    provide("state", state);
-    provide("validate", validate);
-    provide("handleBlur", handleBlur);
-    provide("meta", meta);
+
+    provide(injectionKeys.FORM.ID, inputId);
+    provide(injectionKeys.FORM.INPUT_VALUE, inputValue);
+    provide(injectionKeys.FORM.NAME, inputName);
+    provide(injectionKeys.FORM.ERROR_MESSAGE, errorMessage);
+    provide(injectionKeys.FORM.STATE, state);
+    provide(injectionKeys.FORM.VALIDATE, validate);
+    provide(injectionKeys.FORM.HANDLE_BLUR, handleBlur);
+    provide(injectionKeys.FORM.META, meta);
     return {
       errorMessage,
       state,

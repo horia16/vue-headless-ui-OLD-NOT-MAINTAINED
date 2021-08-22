@@ -11,7 +11,8 @@
   />
 </template>
 <script lang="ts">
-import { defineComponent, inject, WritableComputedRef } from "vue";
+import { injectionKeys, isMissingInjectable } from "@/utils";
+import { defineComponent, inject } from "vue";
 
 export default defineComponent({
   name: "RadioField",
@@ -21,13 +22,13 @@ export default defineComponent({
   },
   emits: ["blur"],
   setup() {
-    const inputValue = inject("inputValue") as WritableComputedRef<string | number | boolean | null>;
-    const id = inject("id") as string;
-    const name = inject("name") as string;
-    const errorMessage = inject("errorMessage") as string;
-    const state = inject("state") as string;
-    const handleBlur = inject("handleBlur") as () => void;
-
+    const inputValue = inject(injectionKeys.FORM.INPUT_VALUE);
+    const id = inject(injectionKeys.FORM.ID);
+    const name = inject(injectionKeys.FORM.NAME);
+    const errorMessage = inject(injectionKeys.FORM.ERROR_MESSAGE);
+    const state = inject(injectionKeys.FORM.STATE);
+    const handleBlur = inject(injectionKeys.FORM.HANDLE_BLUR);
+    isMissingInjectable(id, inputValue, name, errorMessage, state, handleBlur);
     return {
       inputValue,
       id,

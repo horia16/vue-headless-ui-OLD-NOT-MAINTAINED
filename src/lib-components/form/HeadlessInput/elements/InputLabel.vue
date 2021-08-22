@@ -6,6 +6,7 @@
   </component>
 </template>
 <script lang="ts">
+import { injectionKeys, isMissingInjectable } from "@/utils";
 import { defineComponent, inject, PropType } from "vue";
 export default defineComponent({
   name: "InputLabel",
@@ -21,7 +22,8 @@ export default defineComponent({
     isWrapper: { type: Boolean, default: false },
   },
   setup() {
-    const inputId = inject("id") as string;
+    const inputId = inject(injectionKeys.FORM.ID);
+    isMissingInjectable(inputId);
     return {
       inputId,
     };

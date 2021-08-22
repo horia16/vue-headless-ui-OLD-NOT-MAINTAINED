@@ -12,8 +12,8 @@
   />
 </template>
 <script lang="ts">
-import { FieldMeta } from "../../../../hooks/input";
-import { defineComponent, inject, WritableComputedRef } from "vue";
+import { defineComponent, inject } from "vue";
+import { injectionKeys, isMissingInjectable } from "@/utils";
 
 export default defineComponent({
   name: "CheckboxField",
@@ -23,13 +23,14 @@ export default defineComponent({
   },
   emits: ["blur"],
   setup() {
-    const inputValue = inject("inputValue") as WritableComputedRef<string | number | boolean | null>;
-    const id = inject("id") as string;
-    const name = inject("name") as string;
-    const errorMessage = inject("errorMessage") as string;
-    const state = inject("state") as string;
-    const handleBlur = inject("handleBlur") as () => void;
-    const meta = inject("meta") as FieldMeta<undefined>;
+    const inputValue = inject(injectionKeys.FORM.INPUT_VALUE);
+    const id = inject(injectionKeys.FORM.ID);
+    const name = inject(injectionKeys.FORM.NAME);
+    const errorMessage = inject(injectionKeys.FORM.ERROR_MESSAGE);
+    const state = inject(injectionKeys.FORM.STATE);
+    const meta = inject(injectionKeys.FORM.META);
+    const handleBlur = inject(injectionKeys.FORM.HANDLE_BLUR);
+    isMissingInjectable(id, name, errorMessage, state, meta, handleBlur);
     return {
       inputValue,
       id,

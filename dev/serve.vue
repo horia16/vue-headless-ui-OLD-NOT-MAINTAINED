@@ -15,7 +15,8 @@
         </tab-switch>
       </div>
 
-      <headless-tab>
+      <!-- <transition-group name="fade"> -->
+      <headless-tab key="1">
         <h1>
           Inputs Test
         </h1>
@@ -118,7 +119,8 @@
           <button>Submit</button>
         </headless-form>
       </headless-tab>
-      <headless-tab>
+
+      <headless-tab key="2">
         <h1>
           Icon Test
         </h1>
@@ -163,7 +165,7 @@
       >"
           /></div
       ></headless-tab>
-      <headless-tab>
+      <headless-tab key="3">
         <h1>
           Accordion tests
         </h1>
@@ -234,7 +236,7 @@
           </accordion-content>
         </headless-accordion>
       </headless-tab>
-      <headless-tab>
+      <headless-tab key="4">
         <h1>
           Dialog tests
         </h1>
@@ -301,6 +303,7 @@
           </dialog-content>
         </headless-dialog>
       </headless-tab>
+      <!-- </transition-group> -->
     </headless-tabs>
   </div>
 </template>
@@ -342,4 +345,11 @@ export default defineComponent({
 </script>
 <style>
 @import url(https://cdn.jsdelivr.net/npm/@mdi/font@5.9.55/css/materialdesignicons.min.css);
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
 </style>
