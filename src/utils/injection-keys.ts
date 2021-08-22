@@ -1,5 +1,5 @@
 import { FieldMeta, ValidationResult } from "@/hooks/input";
-import { ComputedRef, InjectionKey, WritableComputedRef } from "vue";
+import { ComputedRef, InjectionKey, Ref, WritableComputedRef } from "vue";
 
 const ID: InjectionKey<string> = Symbol("ID");
 const INPUT_VALUE: InjectionKey<WritableComputedRef<string | number | boolean | any[] | null>> = Symbol("INPUT_VALUE");
@@ -32,7 +32,19 @@ const ACCORDION = {
   DELAY,
 };
 
+const DIALOG = {
+  ID,
+  IS_OPEN,
+};
+const TAB_ARRAY: InjectionKey<Ref<Array<number | string>>> = Symbol("TAB_ARRAY");
+const SWITCH_ARRAY: InjectionKey<Ref<Array<number | string>>> = Symbol("SWITCH_ARRAY");
+const CURRENT_TAB: InjectionKey<WritableComputedRef<number>> = Symbol("CURRENT_TAB");
+const SWITCH_TAB: InjectionKey<(index: number) => void> = Symbol("SWITCH_TAB");
+const TABS = { TAB_ARRAY, SWITCH_ARRAY, CURRENT_TAB, SWITCH_TAB };
+
 export default {
   FORM,
   ACCORDION,
+  DIALOG,
+  TABS,
 };

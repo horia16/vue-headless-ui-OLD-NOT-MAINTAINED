@@ -11,6 +11,7 @@
 </template>
 <script lang="ts">
 import { useDialogModel } from "@/hooks/dialog";
+import { injectionKeys } from "@/utils";
 import { defineComponent, onBeforeUnmount, onMounted, provide, ref } from "vue";
 
 export default defineComponent({
@@ -23,8 +24,8 @@ export default defineComponent({
   setup(props, context) {
     const height = ref(window.innerHeight);
     const { value: isOpen, id } = useDialogModel(props, context);
-    provide("id", id);
-    provide("state", isOpen);
+    provide(injectionKeys.DIALOG.ID, id);
+    provide(injectionKeys.DIALOG.IS_OPEN, isOpen);
 
     function updateHeight() {
       height.value = window.innerHeight;

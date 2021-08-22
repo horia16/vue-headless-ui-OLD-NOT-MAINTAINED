@@ -5,14 +5,16 @@
 </template>
 <script lang="ts">
 import DomObserver from "@/lib-components/utility/DomObserver.vue";
-import { defineComponent, inject, onBeforeUnmount, onMounted, Ref } from "vue";
+import { defineComponent, inject, onBeforeUnmount, onMounted } from "vue";
 import { dialogs } from "@/hooks/dialog";
+import { injectionKeys, isMissingInjectable } from "@/utils";
 export default defineComponent({
   components: { DomObserver },
   name: "DialogContent",
   setup() {
-    const state = inject("state") as Ref<boolean>;
-    const id = inject("id") as string;
+    const isOpen = inject(injectionKeys.DIALOG.IS_OPEN);
+    const id = inject(injectionKeys.DIALOG.ID);
+    isMissingInjectable(isOpen, id);
 
     const focusableElements = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
     let focusableContent: null | NodeListOf<HTMLElement> | undefined = null;
@@ -38,11 +40,11 @@ export default defineComponent({
     function onKeyDown(e: KeyboardEvent) {
       // If the last active dialog is this
       if (dialogs.value[dialogs.value.length - 1] == id) {
-        if (state.value && focusableContent) {
+        if (isOpen?.value && focusableContent) {
           const isTabPressed = e.key == "Tab";
 
           if (e.key == "Escape") {
-            state.value = false;
+            isOpen.value = false;
           }
 
           if (!isTabPressed) {

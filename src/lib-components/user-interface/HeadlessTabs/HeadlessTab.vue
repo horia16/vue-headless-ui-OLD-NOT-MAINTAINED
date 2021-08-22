@@ -1,24 +1,21 @@
 <template>
-  <div v-if="currentTab == id">
-    <slot :id="id" :currentTab="currentTab" :data="userTabs[id]" />
+  <div v-if="index == currentTab">
+    <slot :switchTab="switchTab" :currentTab="currentTab" :tabIndex="index" />
   </div>
 </template>
 <script lang="ts">
-import { ComputedRef, defineComponent, inject, ref, Ref, WritableComputedRef } from "vue";
-
+import { injectionKeys, isMissingInjectable } from "@/utils";
+import { defineComponent, inject } from "vue";
+import { useTabLink } from "@/hooks/tabs";
 export default defineComponent({
   name: "HeadlessTab",
   setup() {
-    const currentTab = inject("currentTab") as WritableComputedRef<number | null>;
-    const tabs = inject("tabs") as Ref<Array<number>>;
-    const userTabs = inject("userTabs") as ComputedRef<Array<Record<string, any>>>;
-    const id = ref(tabs.value.length);
-    tabs.value.push(id.value);
-    return {
-      id,
-      currentTab,
-      userTabs,
-    };
+    const tabs = inject(injectionKeys.TABS.TAB_ARRAY);
+    const currentTab = inject(injectionKeys.TABS.CURRENT_TAB);
+    const switchTab = inject(injectionKeys.TABS.SWITCH_TAB);
+    isMissingInjectable(tabs, currentTab, switchTab);
+    const { index } = useTabLink(tabs);
+    return { currentTab, index, switchTab };
   },
 });
 </script>

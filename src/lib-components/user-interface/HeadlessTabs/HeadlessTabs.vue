@@ -1,40 +1,36 @@
 <template>
   <div>
-    <slot :switchTab="switchToTab" :currentTab="currentTab" />
+    <slot :switchTab="switchTab" :currentTab="currentTab" />
   </div>
 </template>
 <script lang="ts">
 import { useModel } from "@/hooks/input";
-import { computed, defineComponent, PropType, provide, Ref, ref } from "vue";
+import { injectionKeys } from "@/utils";
+import { defineComponent, provide, ref, Ref } from "vue";
 
 export default defineComponent({
   name: "HeadlessTabs",
   props: {
     modelValue: { type: Number, default: null },
-    tabs: {
-      type: Array as PropType<Array<Record<string, any>>>,
-      default: () => {
-        return [];
-      },
-    },
   },
   setup(props, context) {
     const currentTab = useModel(props, context);
-    const tabs: Ref<Array<number>> = ref([]);
-    const userTabs = computed(() => props.tabs);
-
-    provide("currentTab", currentTab);
-    provide("tabs", tabs);
-    provide("userTabs", userTabs);
-
-    function switchToTab(index: number) {
+    const tabs: Ref<Array<number | string>> = ref([]);
+    const switches: Ref<Array<number | string>> = ref([]);
+    function switchTab(index: number) {
       currentTab.value = index;
     }
 
+    provide(injectionKeys.TABS.CURRENT_TAB, currentTab);
+    provide(injectionKeys.TABS.TAB_ARRAY, tabs);
+    provide(injectionKeys.TABS.SWITCH_ARRAY, switches);
+    provide(injectionKeys.TABS.SWITCH_TAB, switchTab);
+
     return {
       tabs,
+      switches,
       currentTab,
-      switchToTab,
+      switchTab,
     };
   },
 });
