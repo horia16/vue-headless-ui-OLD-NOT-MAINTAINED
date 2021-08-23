@@ -4,7 +4,7 @@
       {{ label }}
     </slot>
     <span v-if="loading">
-      <slot>
+      <slot name="loading">
         Loading...
       </slot>
     </span>
