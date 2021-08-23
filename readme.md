@@ -24,7 +24,7 @@
    <img alt="Code Grade" src="https://www.code-inspector.com/project/26676/status/svg" >
   </span>
    <span>
-   <img alt="Downloads" src="https://img.shields.io/github/downloads/horia16/vue-headless-ui/total.svg" >
+   <img alt="Downloads" src="https://img.shields.io/npm/dw/vue-headless-ui" >
   </span>
  
 <div>
