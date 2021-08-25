@@ -1,10 +1,14 @@
 <template>
-  <div></div>
+  <div>
+    <test />
+  </div>
 </template>
 <script lang="ts">
+import Test from "../tests/unit/form/helpers/Test.vue";
 import { defineComponent } from "vue";
 
 export default defineComponent({
+  components: { Test },
   name: "ServeDev",
   setup() {
     return {};
