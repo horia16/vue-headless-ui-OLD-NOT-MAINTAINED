@@ -28,7 +28,6 @@ export default defineComponent({
       props as InputBaseProps,
       context
     );
-
     provide(injectionKeys.FORM.ID, inputId);
     provide(injectionKeys.FORM.INPUT_VALUE, inputValue);
     provide(injectionKeys.FORM.NAME, inputName);
