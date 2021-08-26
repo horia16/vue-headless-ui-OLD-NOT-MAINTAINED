@@ -64,7 +64,10 @@ The only dependency of this library is [VeeValidate](https://vee-validate.logare
 
 This library is written in **TypeScript** and **ONLY** supports **Vue 3**.
 
-  
+## Documentation
+
+Docs are available at https://horia16.github.io/vue-headless-ui-docs  - this it still very early in development and might change in the future.
+
 
 ## Installation
 
