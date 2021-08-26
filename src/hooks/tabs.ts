@@ -15,7 +15,14 @@ export function useTabLink(array: Ref<Array<number | string>> | undefined) {
   }
   // Get the index of  the tab/switch in the array
   const index = computed(() => {
-    return array?.value.findIndex((x) => x === id.value) ?? -1;
+    if (array) {
+      const index = array.value.findIndex((x) => x == id.value);
+      if (index) {
+        return index;
+      }
+      return -1;
+    }
+    return -1;
   });
   // Make sure we remove the element from the array in case we unmount it
   onBeforeUnmount(() => {
