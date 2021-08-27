@@ -20,7 +20,6 @@ import { defineComponent, inject, Ref, ref, watchEffect } from "vue";
 
 export default defineComponent({
   name: "HeadlessTabSwitch",
-  inheritAttrs: false,
   setup() {
     const switchButton: Ref<HTMLButtonElement | null> = ref(null);
     const switches = inject(injectionKeys.TABS.SWITCH_ARRAY);

@@ -20,7 +20,6 @@ export default defineComponent({
     zIndex: { type: Number, default: 100 },
     modelValue: { type: Boolean, default: null },
   },
-  inheritAttrs: false,
   setup(props, context) {
     const height = ref(window.innerHeight);
     const { value: isOpen, id } = useDialogModel(props, context);
