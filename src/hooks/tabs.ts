@@ -17,7 +17,7 @@ export function useTabLink(array: Ref<Array<number | string>> | undefined) {
   const index = computed(() => {
     if (array) {
       const index = array.value.findIndex((x) => x == id.value);
-      if (index) {
+      if (index != null || index != undefined) {
         return index;
       }
       return -1;

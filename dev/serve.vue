@@ -1,14 +1,24 @@
 <template>
-  <div></div>
+  <div>
+    <headless-tabs v-model="tab">
+      <headless-tab-switches>
+        <headless-tab-switch> Preview </headless-tab-switch>
+        <headless-tab-switch> Code </headless-tab-switch>
+      </headless-tab-switches>
+      <headless-tab>a</headless-tab>
+      <headless-tab>b</headless-tab>
+    </headless-tabs>
+  </div>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 
 export default defineComponent({
   components: {},
   name: "ServeDev",
   setup() {
-    return {};
+    const tab = ref(0);
+    return { tab };
   },
 });
 </script>
