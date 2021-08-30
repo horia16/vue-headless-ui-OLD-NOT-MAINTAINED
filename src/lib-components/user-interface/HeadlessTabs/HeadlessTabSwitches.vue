@@ -1,19 +1,20 @@
 <template>
-  <div role="tablist" :aria-label="ariaLabel">
-    <slot />
+  <div :aria-label="ariaLabel" role="tablist">
+    <slot/>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
+  import {defineComponent} from "vue";
 
-export default defineComponent({
-  name: "HeadlessTabSwitches",
-  props: {
-    ariaLabel: {
-      type: [String, Number],
-      default: "Tab list",
+  export default defineComponent({
+    name: "HeadlessTabSwitches",
+    props: {
+      ariaLabel: {
+        type: [String, Number],
+        default: "Tab list",
+      },
     },
-  },
-  setup() {},
-});
+    setup() {
+    },
+  });
 </script>

@@ -1,20 +1,38 @@
 <template>
   <div>
-    <headless-tabs v-model="tab">
-      <headless-tab-switches>
-        <headless-tab-switch> Preview </headless-tab-switch>
-        <headless-tab-switch> Code </headless-tab-switch>
-      </headless-tab-switches>
-      <headless-tab>a</headless-tab>
-      <headless-tab>b</headless-tab>
-    </headless-tabs>
+    <headless-accordion self >
+      <accordion-header style="display:flex;border:1px solid black">
+        <accordion-toggle>Toggle</accordion-toggle>
+      </accordion-header>
+      <accordion-content style="border:1px solid black">
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+        <div>Content</div>
+      </accordion-content>
+    </headless-accordion>
   </div>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from "vue";
+import HeadlessAccordion from "@/lib-components/user-interface/HeadlessAccordion/HeadlessAccordion.vue";
+import AccordionHeader from "@/lib-components/user-interface/HeadlessAccordion/AccordionHeader.vue";
+import AccordionContent from "@/lib-components/user-interface/HeadlessAccordion/AccordionContent.vue";
+import AccordionToggle from "@/lib-components/user-interface/HeadlessAccordion/AccordionToggle.vue";
 
 export default defineComponent({
-  components: {},
+  components: {AccordionToggle, AccordionContent, AccordionHeader, HeadlessAccordion},
   name: "ServeDev",
   setup() {
     const tab = ref(0);

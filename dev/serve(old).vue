@@ -136,7 +136,7 @@
           <h4>Inline Svg</h4>
           <headless-icon
             name="alien"
-            html="<svg
+            :html="`<svg
         xmlns='http://www.w3.org/2000/svg'
         xmlns:xlink='http://www.w3.org/1999/xlink'
         aria-hidden='true'
@@ -162,7 +162,7 @@
           fill='#2B3B47'
           d='M37 64.5c-3.2 0-6-1.6-7.6-4.3c-.2-.4-.2-.8 0-1.2c.2-.4.6-.6 1.1-.6h13.2c.4 0 .8.2 1.1.6c.2.4.2.8 0 1.2c-1.8 2.7-4.7 4.3-7.8 4.3z'
         /></svg
-      >"
+      >`"
           /></div
       ></headless-tab>
       <headless-tab key="3">

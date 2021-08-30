@@ -35,6 +35,7 @@ test("no errors on submit", async () => {
 
   await wrapper.find("button").trigger("click");
   await nextTick();
+  // @ts-ignore
   expect(wrapper.getComponent(HeadlessForm).vm.errorCount == 0).toBeTruthy();
 });
 
@@ -68,6 +69,7 @@ test("error on wrong submit", async () => {
   const wrapper = mount(Form, { attachTo: "body" });
   await wrapper.find("button").trigger("click");
   await nextTick();
+  // @ts-ignore
   expect(wrapper.getComponent(HeadlessForm).vm.errorCount).toEqual(1);
 });
 

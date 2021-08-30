@@ -2,7 +2,7 @@
 
 <a  href="#"  target="_blank">
 
-<img  alt="Vue Headless UI Logo"  width="300"  src="https://user-images.githubusercontent.com/32731652/128643547-88800199-930d-4623-9adc-777a13535d62.png">
+<img  alt="Vue Headless UI Logo"  width="300"  src="https://horia16.github.io/vue-headless-ui-docs/img/logo.e60481ad.svg">
 
 </a>
 
@@ -10,7 +10,7 @@
 
   
 
-# THIS LIBRARY IS IN THE APLHA STAGE!
+# THIS LIBRARY IS IN THE ALPHA STAGE!
 
   
 
