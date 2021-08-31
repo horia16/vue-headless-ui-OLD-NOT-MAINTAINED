@@ -13,7 +13,6 @@ jobs:
           node-version: 14.x
           registry-url: 'https://registry.npmjs.org'
       - run: npm install
-      - run: npm test:unit
       - run: npm build
       - run: npm publish
         env:
