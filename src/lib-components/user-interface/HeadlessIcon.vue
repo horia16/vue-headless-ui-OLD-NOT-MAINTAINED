@@ -29,35 +29,35 @@
 </template>
 
 <script lang="ts">
-  import {computed, defineComponent} from "vue";
+import {computed, defineComponent} from "vue";
 
-  export default defineComponent({
-    name: "HeadlessIcon",
-    props: {
-      element: {type: String, default: "span"},
-      name: {type: String, required: true},
-      font: {type: Boolean, default: false},
-      iconify: {type: Boolean, default: false},
-      html: {type: String, default: null},
-      src: {type: String, default: null},
-      alt: {type: String, default: null},
-      width: {type: [String, Number], default: 24},
-      height: {type: [String, Number], default: 24},
-      display: {type: String, default: "inline-flex"},
-    },
-    setup(props, {attrs}) {
-      const dimensions = computed(() => {
-        const width = typeof props.width == "number" ? `${props.width}px` : props.width;
-        const height = typeof props.height == "number" ? `${props.height}px` : props.height;
-        return {
-          width,
-          height,
-        };
-      });
+export default defineComponent({
+  name: "HeadlessIcon",
+  props: {
+    element: {type: String, default: "span"},
+    name: {type: String, required: true},
+    font: {type: Boolean, default: false},
+    iconify: {type: Boolean, default: false},
+    html: {type: String, default: null},
+    src: {type: String, default: null},
+    alt: {type: String, default: null},
+    width: {type: [String, Number], default: 24},
+    height: {type: [String, Number], default: 24},
+    display: {type: String, default: "inline-flex"},
+  },
+  setup(props, {attrs}) {
+    const dimensions = computed(() => {
+      const width = typeof props.width == "number" ? `${props.width}px` : props.width;
+      const height = typeof props.height == "number" ? `${props.height}px` : props.height;
       return {
-        attrs,
-        dimensions,
+        width,
+        height,
       };
-    },
-  });
+    });
+    return {
+      attrs,
+      dimensions,
+    };
+  },
+});
 </script>

@@ -1,6 +1,6 @@
 <template>
-  <button @click="toggle" :id="`${accordionId}_toggle`" :aria-controls="accordionId" :aria-expanded="isOpen">
-    <slot :isOpen="isOpen" :accordionId="accordionId" />
+  <button :id="`${accordionId}_toggle`" :aria-controls="accordionId" :aria-expanded="isOpen" @click="toggle">
+    <slot :accordionId="accordionId" :isOpen="isOpen"/>
   </button>
 </template>
 
@@ -10,7 +10,7 @@ import {injectionKeys, isMissingInjectable} from "@/utils";
 
 export default defineComponent({
   name: "AccordionToggle",
-  setup(){
+  setup() {
     const isOpen = inject(injectionKeys.ACCORDION.IS_OPEN);
     const accordionId = inject(injectionKeys.ACCORDION.COMPUTED_ID);
     const toggle = inject(injectionKeys.ACCORDION.TOGGLE);

@@ -10,34 +10,34 @@
   </teleport>
 </template>
 <script lang="ts">
-  import {useDialogModel} from "@/hooks/dialog";
-  import {injectionKeys} from "@/utils";
-  import {defineComponent, onBeforeUnmount, onMounted, provide, ref} from "vue";
+import {useDialogModel} from "@/hooks/dialog";
+import {injectionKeys} from "@/utils";
+import {defineComponent, onBeforeUnmount, onMounted, provide, ref} from "vue";
 
-  export default defineComponent({
-    name: "HeadlessDialog",
-    props: {
-      zIndex: {type: Number, default: 100},
-      modelValue: {type: Boolean, default: null},
-      fullScreen:{type:Boolean, default: false}
-    },
-    setup(props, context) {
-      const height = ref(window.innerHeight);
-      const {value: isOpen, id} = useDialogModel(props, context);
-      provide(injectionKeys.DIALOG.ID, id);
-      provide(injectionKeys.DIALOG.IS_OPEN, isOpen);
+export default defineComponent({
+  name: "HeadlessDialog",
+  props: {
+    zIndex: {type: Number, default: 100},
+    modelValue: {type: Boolean, default: null},
+    fullScreen: {type: Boolean, default: false}
+  },
+  setup(props, context) {
+    const height = ref(window.innerHeight);
+    const {value: isOpen, id} = useDialogModel(props, context);
+    provide(injectionKeys.DIALOG.ID, id);
+    provide(injectionKeys.DIALOG.IS_OPEN, isOpen);
 
-      function updateHeight() {
-        height.value = window.innerHeight;
-      }
+    function updateHeight() {
+      height.value = window.innerHeight;
+    }
 
-      onMounted(() => {
-        window.addEventListener("resize", updateHeight);
-      });
-      onBeforeUnmount(() => {
-        window.removeEventListener("resize", updateHeight);
-      });
-      return {height, isOpen, context};
-    },
-  });
+    onMounted(() => {
+      window.addEventListener("resize", updateHeight);
+    });
+    onBeforeUnmount(() => {
+      window.removeEventListener("resize", updateHeight);
+    });
+    return {height, isOpen, context};
+  },
+});
 </script>
