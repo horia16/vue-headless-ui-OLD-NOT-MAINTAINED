@@ -8,11 +8,7 @@
 
 </p>
 
-  
-
 # THIS LIBRARY IS IN THE ALPHA STAGE!
-
-  
 
 ## DO NOT USE IN PRODUCTION!
 
@@ -26,9 +22,9 @@
    <span>
    <img alt="Downloads" src="https://img.shields.io/npm/dw/vue-headless-ui" >
   </span>
- 
+
 <div>
-  
+
 <div>
   <span>
    <img alt="License" src="https://img.shields.io/github/license/horia16/vue-headless-ui.svg" >
@@ -40,7 +36,7 @@
   <span>
    <img alt="Types" src="https://badgen.net/npm/types/vue-headless-ui" >
   </span>
- 
+
 <div>
   <div>
    <span>
@@ -50,32 +46,30 @@
    <img alt="Typescript" src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" >
   </span>
   </div>
- 
+
 
 Vue Headless UI is a MIT licensed project that is developed and maintained by Ioan-Horia Rotaru.
 
-  
+The idea behind this project is to allow the users to style their components in whatever way they want to without
+writing massive amounts of **JavaScript**.
 
-The idea behind this project is to allow the users to style their components in whatever way they want to without writing massive amounts of **JavaScript**.
+This library is heavily inspired by [Headless UI ](https://headlessui.dev/)  created by the team
+at [Tailwind](https://tailwindcss.com/) and falls within the same scope with the addition of more components and a focus
+on from inputs.
 
-This library is heavily inspired by [Headless UI ](https://headlessui.dev/)  created by the team at [Tailwind](https://tailwindcss.com/) and falls within the same scope with the addition of more components and a focus on from inputs.
-
-The only dependency of this library is [VeeValidate](https://vee-validate.logaretm.com/v4/). This is due to the form inputs needing a robust and reliable method of validation.
+The only dependency of this library is [VeeValidate](https://vee-validate.logaretm.com/v4/). This is due to the form
+inputs needing a robust and reliable method of validation.
 
 This library is written in **TypeScript** and **ONLY** supports **Vue 3**.
 
 ## Documentation
 
-Docs are available at https://horia16.github.io/vue-headless-ui-docs  - this it still very early in development and might change in the future.
-
+Docs are available at https://horia16.github.io/vue-headless-ui-docs  - this it still very early in development and
+might change in the future.
 
 ## Installation
 
-  
-
 Use npm or yarn to install the library.
-
-  
 
 ```bash
 
@@ -83,11 +77,7 @@ npm install vue-headless-ui
 
 ```
 
-  
-
 or
-
-  
 
 ```bash
 
@@ -95,11 +85,7 @@ yarn add vue-headless-ui
 
 ```
 
-  
-
 ## Example Usage
-
-  
 
 ```typescript
 
@@ -117,11 +103,7 @@ components:  { HeadlessInput, InputField, InputLabel, InputError },
 
 ```
 
-  
-
 And in the template
-
-  
 
 ```html
 
@@ -137,22 +119,12 @@ And in the template
 
 ```
 
-  
-
 ## Contributing
-
-  
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-  
-
 Please make sure to update tests as appropriate.
 
-  
-
 ## License
-
-  
 
 This project is licensed under the [MIT](https://choosealicense.com/licenses/mit/) license.

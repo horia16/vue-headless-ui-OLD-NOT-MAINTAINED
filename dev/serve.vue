@@ -1,6 +1,6 @@
 <template>
   <div>
-    <headless-accordion self >
+    <headless-accordion self>
       <accordion-header style="display:flex;border:1px solid black">
         <accordion-toggle>Toggle</accordion-toggle>
       </accordion-header>
@@ -25,7 +25,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import {defineComponent, ref} from "vue";
 import HeadlessAccordion from "@/lib-components/user-interface/HeadlessAccordion/HeadlessAccordion.vue";
 import AccordionHeader from "@/lib-components/user-interface/HeadlessAccordion/AccordionHeader.vue";
 import AccordionContent from "@/lib-components/user-interface/HeadlessAccordion/AccordionContent.vue";
@@ -36,17 +36,19 @@ export default defineComponent({
   name: "ServeDev",
   setup() {
     const tab = ref(0);
-    return { tab };
+    return {tab};
   },
 });
 </script>
 
 <style>
 @import url(https://cdn.jsdelivr.net/npm/@mdi/font@5.9.55/css/materialdesignicons.min.css);
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s;
 }
+
 .fade-enter,
 .fade-leave-to {
   opacity: 0;

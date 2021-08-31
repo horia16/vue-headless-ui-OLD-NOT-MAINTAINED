@@ -4,12 +4,12 @@
   </div>
 </template>
 <script lang="ts">
-  import {defineComponent} from "vue";
+import {defineComponent} from "vue";
 
-  export default defineComponent({
-    name: "AccordionGroup",
-    setup() {
-      //   const accordions = ref()
-    },
-  });
+export default defineComponent({
+  name: "AccordionGroup",
+  setup() {
+    //   const accordions = ref()
+  },
+});
 </script>

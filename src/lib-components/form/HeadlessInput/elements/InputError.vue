@@ -6,22 +6,22 @@
   </div>
 </template>
 <script lang="ts">
-  import {injectionKeys, isMissingInjectable} from "@/utils";
-  import {defineComponent, inject} from "vue";
+import {injectionKeys, isMissingInjectable} from "@/utils";
+import {defineComponent, inject} from "vue";
 
-  export default defineComponent({
-    name: "InputError",
-    setup() {
-      const errorMessage = inject(injectionKeys.FORM.ERROR_MESSAGE);
-      const state = inject(injectionKeys.FORM.STATE);
-      const id = inject(injectionKeys.FORM.ID);
-      isMissingInjectable(errorMessage, state, id);
+export default defineComponent({
+  name: "InputError",
+  setup() {
+    const errorMessage = inject(injectionKeys.FORM.ERROR_MESSAGE);
+    const state = inject(injectionKeys.FORM.STATE);
+    const id = inject(injectionKeys.FORM.ID);
+    isMissingInjectable(errorMessage, state, id);
 
-      return {
-        errorMessage,
-        state,
-        id,
-      };
-    },
-  });
+    return {
+      errorMessage,
+      state,
+      id,
+    };
+  },
+});
 </script>

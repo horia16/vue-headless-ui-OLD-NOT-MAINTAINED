@@ -2,6 +2,7 @@ import {computed, ComputedRef, Ref, SetupContext} from "vue";
 import {useField} from "vee-validate";
 import {randomString} from "@/utils";
 
+
 export interface InputBaseProps {
     modelValue: string | number | boolean | Array<any> | null;
     id: string | number | null;
@@ -43,7 +44,7 @@ export function useInput(props: InputBaseProps, context: SetupContext<any>) {
     // Use the provided name or generate one based on the id
     const inputName = props.name ? `${props.name}` : `${inputId}-name`;
     // Use validation only if we don't have a parent state
-    const {errorMessage, value, meta, validate}: FieldData = useField(inputName, props.rules) as any;
+    const {errorMessage, value, meta, validate}: FieldData = useField(inputName, props.rules);
     const inputValue = computed({
         get: () => props.modelValue,
         set: (val) => {
