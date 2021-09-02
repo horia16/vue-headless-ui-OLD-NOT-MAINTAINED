@@ -1,13 +1,12 @@
 <template>
   <button :id="`${accordionId}_toggle`" :aria-controls="accordionId" :aria-expanded="isOpen" @click="toggle">
-    <slot :accordionId="accordionId" :isOpen="isOpen"/>
+    <slot :accordionId="accordionId" :isOpen="isOpen" />
   </button>
 </template>
 
-<script>
-import {defineComponent, inject} from "vue";
-import {injectionKeys, isMissingInjectable} from "@/utils";
-
+<script lang="ts">
+import { defineComponent, inject } from "vue";
+import { injectionKeys, isMissingInjectable } from "@/utils";
 export default defineComponent({
   name: "AccordionToggle",
   setup() {
@@ -18,9 +17,8 @@ export default defineComponent({
     return {
       isOpen,
       toggle,
-      accordionId,
+      accordionId
     };
   }
 });
 </script>
-

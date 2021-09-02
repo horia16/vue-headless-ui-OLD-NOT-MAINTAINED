@@ -1,10 +1,10 @@
 <template>
   <div ref="content">
-    <slot/>
+    <slot />
   </div>
 </template>
 <script lang="ts">
-import {defineComponent, onMounted, Ref, ref} from "vue";
+import { defineComponent, onMounted, Ref, ref } from "vue";
 
 export default defineComponent({
   name: "AccordionContentWrapper",
@@ -16,8 +16,8 @@ export default defineComponent({
       }
     });
     return {
-      content,
+      content
     };
-  },
+  }
 });
 </script>

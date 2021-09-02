@@ -1,10 +1,10 @@
 <template>
   <div ref="content">
-    <slot/>
+    <slot />
   </div>
 </template>
 <script lang="ts">
-import {defineComponent, onBeforeMount, onMounted, Ref, ref} from "vue";
+import { defineComponent, onBeforeMount, onMounted, Ref, ref } from "vue";
 
 export default defineComponent({
   name: "DomObserver",
@@ -12,9 +12,9 @@ export default defineComponent({
     config: {
       type: Object,
       default: () => {
-        return {attributes: true, childList: true, subtree: true};
-      },
-    },
+        return { attributes: true, childList: true, subtree: true };
+      }
+    }
   },
   emits: ["updated", "mounted"],
   setup(props, context) {
@@ -37,8 +37,8 @@ export default defineComponent({
     });
 
     return {
-      content,
+      content
     };
-  },
+  }
 });
 </script>

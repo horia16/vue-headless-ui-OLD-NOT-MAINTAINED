@@ -5,14 +5,14 @@
   </select>
 </template>
 <script lang="ts">
-import {injectionKeys, isMissingInjectable} from "@/utils";
-import {defineComponent, inject, PropType} from "vue";
+import { injectionKeys, isMissingInjectable } from "@/utils";
+import { defineComponent, inject, PropType } from "vue";
 
 export default defineComponent({
   name: "SelectField",
   props: {
-    options: {type: Object as PropType<{ name: string; value: any }>, required: true},
-    placeholder: {type: String, default: null},
+    options: { type: Object as PropType<{ name: string; value: any }>, required: true },
+    placeholder: { type: String, default: null }
   },
   emits: ["blur"],
   setup() {
@@ -26,8 +26,8 @@ export default defineComponent({
       inputValue,
       id,
       name,
-      handleBlur,
+      handleBlur
     };
-  },
+  }
 });
 </script>

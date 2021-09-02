@@ -1,6 +1,6 @@
 {
   "name": "vue-headless-ui",
-  "version": "0.0.14-alpha.8",
+  "version": "0.0.14-alpha.9",
   "description": "",
   "main": "dist/vue-headless-ui.ssr.js",
   "browser": "dist/vue-headless-ui.esm.js",
@@ -20,10 +20,8 @@
     "build:es": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format es",
     "build:unpkg": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format iife",
     "postbuild": "rimraf ./dist/types/dev ./dist/types/src/entry.d.ts",
+    "pretty": "prettier --write \"./**/*.{js,jsx,json,vue}\"",
     "test:unit": "jest"
-  },
-  "dependencies": {
-
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
@@ -46,6 +44,7 @@
     "jest": "^26.6.3",
     "minimist": "^1.2.5",
     "postcss": "^8.2.10",
+    "prettier": "^1.19.1",
     "rimraf": "^3.0.2",
     "rollup": "^2.52.8",
     "rollup-plugin-postcss": "^4.0.0",
@@ -55,13 +54,13 @@
     "ts-jest": "^26.5.6",
     "ttypescript": "^1.5.12",
     "typescript": "^4.0.3",
+    "vee-validate": "^4.4.9",
     "vue": "^3.0.5",
-    "vue-jest": "^5.0.0-alpha.10",
-    "vee-validate": "^4.4.9"
+    "vue-jest": "^5.0.0-alpha.10"
   },
   "peerDependencies": {
-    "vue": "^3.0.5",
-    "vee-validate": "^4.4.9"
+    "vee-validate": "^4.4.9",
+    "vue": "^3.0.5"
   },
   "engines": {
     "node": ">=12"

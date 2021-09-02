@@ -15,33 +15,17 @@
     "sourceMap": true,
     "baseUrl": ".",
     "newLine": "lf",
-    "types": [
-      "node",
-      "vue",
-      "jest"
-    ],
+    "types": ["node", "vue", "jest"],
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
+      "@/*": ["src/*"]
     },
     "plugins": [
       {
         "transform": "@zerollup/ts-transform-paths",
-        "exclude": [
-          "*"
-        ]
+        "exclude": ["*"]
       }
     ],
-    "lib": [
-      "esnext",
-      "dom",
-      "dom.iterable",
-      "scripthost"
-    ]
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  "exclude": ["node_modules", "dist"]
 }

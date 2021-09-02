@@ -11,17 +11,16 @@
   </button>
 </template>
 <script lang="ts">
-import {defineComponent} from "vue";
+import { defineComponent } from "vue";
 import HeadlessIcon from "../HeadlessIcon.vue";
 
 export default defineComponent({
-  components: {HeadlessIcon},
+  components: { HeadlessIcon },
   name: "HeadlessButton",
   props: {
-    label: {type: [String, Number], default: null},
-    loading: {type: Boolean, default: false},
+    label: { type: [String, Number], default: null },
+    loading: { type: Boolean, default: false }
   },
-  setup() {
-  },
+  setup() {}
 });
 </script>

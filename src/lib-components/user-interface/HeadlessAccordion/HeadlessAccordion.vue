@@ -1,20 +1,20 @@
 <template>
   <div>
-    <slot/>
+    <slot />
   </div>
 </template>
 <script lang="ts">
-import {injectionKeys, randomString} from "@/utils";
-import {computed, defineComponent, provide, ref} from "vue";
+import { injectionKeys, randomString } from "@/utils";
+import { computed, defineComponent, provide, ref } from "vue";
 
 export default defineComponent({
   name: "HeadlessAccordion",
   props: {
-    modelValue: {type: Boolean, default: null},
-    self: {type: Boolean, default: false},
-    openByDefault: {type: Boolean, default: false},
-    animationDelay: {type: Number, default: 700},
-    id: {type: [String, Number], default: null},
+    modelValue: { type: Boolean, default: null },
+    self: { type: Boolean, default: false },
+    openByDefault: { type: Boolean, default: false },
+    animationDelay: { type: Number, default: 700 },
+    id: { type: [String, Number], default: null }
   },
   setup(props, context) {
     const selfOpen = ref(!!props.openByDefault);
@@ -30,17 +30,17 @@ export default defineComponent({
 
     const isOpen = computed({
       get: () => (props.self ? selfOpen.value : props.modelValue),
-      set: (newValue) => (props.self ? (selfOpen.value = newValue) : context.emit("update:modelValue", newValue)),
+      set: newValue => (props.self ? (selfOpen.value = newValue) : context.emit("update:modelValue", newValue))
     });
 
     function toggle() {
       isOpen.value = !isOpen.value;
     }
-
     provide(injectionKeys.ACCORDION.DELAY, delay);
     provide(injectionKeys.ACCORDION.IS_OPEN, isOpen);
     provide(injectionKeys.ACCORDION.TOGGLE, toggle);
     provide(injectionKeys.ACCORDION.COMPUTED_ID, accordionId);
-  },
+    return {};
+  }
 });
 </script>

@@ -1,32 +1,33 @@
 <template>
   <button
-      :id="id"
-      ref="switchButton"
-      :aria-controls="tabs[index]"
-      :aria-selected="index == currentTab"
-      :tabindex="index != currentTab ? '-1' : null"
-      role="tab"
-      type="button"
-      @click="switchTab(index)"
-      @keydown="onKeyDown"
+    :id="id"
+    ref="switchButton"
+    :aria-controls="tabs[index]"
+    :aria-selected="index == currentTab"
+    :tabindex="index != currentTab ? -1 : undefined"
+    role="tab"
+    type="button"
+    @click="switchTab(index)"
+    @keydown="onKeyDown"
   >
-    <slot :currentTab="currentTab" :index="index" :switchTab="switchTab"/>
+    <slot :currentTab="currentTab" :index="index" :switchTab="switchTab" />
   </button>
 </template>
 <script lang="ts">
-import {useTabLink} from "@/hooks/tabs";
-import {injectionKeys, isMissingInjectable} from "@/utils";
-import {defineComponent, inject, Ref, ref, watchEffect} from "vue";
+import { useTabLink } from "@/hooks/tabs";
+import { injectionKeys, isMissingInjectable } from "@/utils";
+import { defineComponent, inject, Ref, ref, watchEffect } from "vue";
 
 export default defineComponent({
   name: "HeadlessTabSwitch",
   setup() {
     const switchButton: Ref<HTMLButtonElement | null> = ref(null);
     const switches = inject(injectionKeys.TABS.SWITCH_ARRAY);
-    const tabs = inject(injectionKeys.TABS.TAB_ARRAY);
+    const tabs = inject(injectionKeys.TABS.TAB_ARRAY, ref([]));
     const currentTab = inject(injectionKeys.TABS.CURRENT_TAB);
-    const switchTab = inject(injectionKeys.TABS.SWITCH_TAB);
-    isMissingInjectable(switches, tabs, currentTab, switchTab);
+    const switchTab = inject(injectionKeys.TABS.SWITCH_TAB, () => {});
+
+    isMissingInjectable(switches, currentTab);
 
     function onKeyDown(e: KeyboardEvent) {
       if (currentTab && switches && switchTab) {
@@ -58,7 +59,7 @@ export default defineComponent({
       }
     }
 
-    const {id, index} = useTabLink(switches);
+    const { id, index } = useTabLink(switches);
 
     watchEffect(() => {
       if (currentTab?.value == index.value) {
@@ -69,7 +70,7 @@ export default defineComponent({
       }
     });
 
-    return {currentTab, index, id, switchTab, onKeyDown, switchButton, tabs};
-  },
+    return { currentTab, index, id, switchTab, onKeyDown, switchButton, tabs };
+  }
 });
 </script>

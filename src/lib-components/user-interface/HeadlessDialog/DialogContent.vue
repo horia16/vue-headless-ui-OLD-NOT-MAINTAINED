@@ -1,16 +1,16 @@
 <template>
   <dom-observer :id="id" aria-modal="true" @mounted="reloadDomArray" @updated="reloadDomArray">
-    <slot/>
+    <slot />
   </dom-observer>
 </template>
 <script lang="ts">
 import DomObserver from "@/lib-components/utility/DomObserver.vue";
-import {defineComponent, inject, onBeforeUnmount, onMounted} from "vue";
-import {dialogs} from "@/hooks/dialog";
-import {injectionKeys, isMissingInjectable} from "@/utils";
+import { defineComponent, inject, onBeforeUnmount, onMounted } from "vue";
+import { dialogs } from "@/hooks/dialog";
+import { injectionKeys, isMissingInjectable } from "@/utils";
 
 export default defineComponent({
-  components: {DomObserver},
+  components: { DomObserver },
   name: "DialogContent",
   setup() {
     const isOpen = inject(injectionKeys.DIALOG.IS_OPEN);
@@ -66,14 +66,13 @@ export default defineComponent({
         }
       }
     }
-
     onMounted(() => {
       document.addEventListener("keydown", onKeyDown);
     });
     onBeforeUnmount(() => {
       document.removeEventListener("keydown", onKeyDown);
     });
-    return {reloadDomArray, id};
-  },
+    return { reloadDomArray, id };
+  }
 });
 </script>

@@ -1,16 +1,16 @@
 <template>
   <input
-      :id="id"
-      v-model="inputValue"
-      :aria-describedby="errorMessage && state === 'error' ? `${id}-error` : null"
-      :aria-invalid="errorMessage && state === 'error'"
-      :name="name"
-      @blur="handleBlur"
+    :id="id"
+    v-model="inputValue"
+    :aria-describedby="errorMessage && state === 'error' ? `${id}-error` : null"
+    :aria-invalid="errorMessage && state === 'error'"
+    :name="name"
+    @blur="handleBlur"
   />
 </template>
 <script lang="ts">
-import {injectionKeys, isMissingInjectable} from "@/utils";
-import {defineComponent, inject} from "vue";
+import { injectionKeys, isMissingInjectable } from "@/utils";
+import { defineComponent, inject } from "vue";
 
 export default defineComponent({
   name: "InputField",
@@ -29,8 +29,8 @@ export default defineComponent({
       name,
       handleBlur,
       errorMessage,
-      state,
+      state
     };
-  },
+  }
 });
 </script>

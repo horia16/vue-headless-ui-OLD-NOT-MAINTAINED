@@ -1,33 +1,33 @@
 <template>
   <component :is="element">
-    <slot :errorMessage="errorMessage" :handleBlur="handleBlur" :meta="meta" :state="state" :validate="validate"/>
+    <slot :errorMessage="errorMessage" :handleBlur="handleBlur" :meta="meta" :state="state" :validate="validate" />
   </component>
 </template>
 <script lang="ts">
-import {defineComponent, PropType, provide} from "vue";
-import {InputBaseProps, useInput} from "@/hooks/input";
-import {injectionKeys} from "@/utils";
+import { defineComponent, PropType, provide } from "vue";
+import { InputBaseProps, useInput } from "@/hooks/input";
+import { injectionKeys } from "@/utils";
 
 export default defineComponent({
   name: "HeadlessInput",
   props: {
-    modelValue: {type: [String, Number, Boolean, Array], default: null},
-    id: {type: [String, Number], default: null},
-    name: {type: [String, Number], default: null},
-    rules: {type: [String, Function], default: null},
+    modelValue: { type: [String, Number, Boolean, Array], default: null },
+    id: { type: [String, Number], default: null },
+    name: { type: [String, Number], default: null },
+    rules: { type: [String, Function], default: null },
     element: {
       type: String as PropType<"div" | "fieldset">,
       default: "div",
       validator: (value: string) => {
         return ["div", "fieldset"].indexOf(value) != -1;
-      },
-    },
+      }
+    }
   },
   emits: ["update:modelValue", "blur"],
   setup(props, context) {
-    const {errorMessage, inputValue, inputName, inputId, state, validate, handleBlur, meta} = useInput(
-        props as InputBaseProps,
-        context
+    const { errorMessage, inputValue, inputName, inputId, state, validate, handleBlur, meta } = useInput(
+      props as InputBaseProps,
+      context
     );
     provide(injectionKeys.FORM.ID, inputId);
     provide(injectionKeys.FORM.INPUT_VALUE, inputValue);
@@ -42,8 +42,8 @@ export default defineComponent({
       state,
       validate,
       handleBlur,
-      meta,
+      meta
     };
-  },
+  }
 });
 </script>
