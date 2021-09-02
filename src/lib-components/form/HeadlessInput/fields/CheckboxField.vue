@@ -1,25 +1,25 @@
 <template>
   <input
-      :id="`${id}-index-${index}`"
-      v-model="inputValue"
-      :aria-describedby="errorMessage && state === 'error' ? `${id}-error` : null"
-      :aria-invalid="errorMessage && state === 'error'"
-      :name="name"
-      :value="value"
-      type="checkbox"
-      @blur="handleBlur"
-      @change="meta.touched = true"
+    :id="`${id}-index-${index}`"
+    v-model="inputValue"
+    :aria-describedby="errorMessage && state === 'error' ? `${id}-error` : null"
+    :aria-invalid="errorMessage && state === 'error'"
+    :name="name"
+    :value="value"
+    type="checkbox"
+    @blur="handleBlur"
+    @change="meta.touched = true"
   />
 </template>
 <script lang="ts">
-import {defineComponent, inject} from "vue";
-import {injectionKeys, isMissingInjectable} from "@/utils";
+import { defineComponent, inject } from "vue";
+import { injectionKeys, isMissingInjectable } from "@/utils";
 
 export default defineComponent({
   name: "CheckboxField",
   props: {
-    value: {type: [String, Number], default: null},
-    index: {type: Number, required: true},
+    value: { type: [String, Number], default: null },
+    index: { type: Number, required: true }
   },
   emits: ["blur"],
   setup() {
@@ -38,8 +38,8 @@ export default defineComponent({
       handleBlur,
       errorMessage,
       state,
-      meta,
+      meta
     };
-  },
+  }
 });
 </script>

@@ -1,23 +1,23 @@
 <template>
   <accordion-content-wrapper
-      v-if="visible"
-      :id="accordionId"
-      ref="wrapper"
-      :aria-labelledby="`${accordionId}_toggle`"
-      :style="{ height: height != null ? `${height}px` : 'auto', overflow, transition: `height ${delay}ms` }"
-      role="region"
-      @mounted="contentMounted"
+    v-if="visible"
+    :id="accordionId"
+    ref="wrapper"
+    :aria-labelledby="`${accordionId}_toggle`"
+    :style="{ height: height != null ? `${height}px` : 'auto', overflow, transition: `height ${delay}ms` }"
+    role="region"
+    @mounted="contentMounted"
   >
-    <slot/>
+    <slot />
   </accordion-content-wrapper>
 </template>
 <script lang="ts">
-import {injectionKeys, isMissingInjectable} from "@/utils";
-import {defineComponent, inject, Ref, ref, watchEffect} from "vue";
+import { injectionKeys, isMissingInjectable } from "@/utils";
+import { defineComponent, inject, Ref, ref, watchEffect } from "vue";
 import AccordionContentWrapper from "./AccordionContentWrapper.vue";
 
 export default defineComponent({
-  components: {AccordionContentWrapper},
+  components: { AccordionContentWrapper },
   name: "AccordionContent",
   setup() {
     const delay = inject(injectionKeys.ACCORDION.DELAY);
@@ -27,9 +27,7 @@ export default defineComponent({
     isMissingInjectable(delay, isOpen, accordionId, toggle);
 
     const wrapper: Ref<{ $el: HTMLElement } | null> = ref(null);
-
     const visible = ref(!!isOpen?.value);
-
     const height: Ref<number | null> = ref(isOpen?.value ? null : 0);
     const overflow = ref("hidden");
 
@@ -97,8 +95,8 @@ export default defineComponent({
       visible,
       delay,
       accordionId,
-      contentMounted,
+      contentMounted
     };
-  },
+  }
 });
 </script>

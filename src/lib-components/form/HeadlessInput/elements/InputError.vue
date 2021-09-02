@@ -6,8 +6,8 @@
   </div>
 </template>
 <script lang="ts">
-import {injectionKeys, isMissingInjectable} from "@/utils";
-import {defineComponent, inject} from "vue";
+import { injectionKeys, isMissingInjectable } from "@/utils";
+import { defineComponent, inject } from "vue";
 
 export default defineComponent({
   name: "InputError",
@@ -20,8 +20,8 @@ export default defineComponent({
     return {
       errorMessage,
       state,
-      id,
+      id
     };
-  },
+  }
 });
 </script>

@@ -1,12 +1,11 @@
 <template>
   <div>
-    <slot :accordionId="accordionId" :isOpen="isOpen" :toggle="toggle"/>
+    <slot :accordionId="accordionId" :isOpen="isOpen" :toggle="toggle" />
   </div>
 </template>
 <script lang="ts">
-import {injectionKeys, isMissingInjectable} from "@/utils";
-
-import {defineComponent, inject} from "vue";
+import { injectionKeys, isMissingInjectable } from "@/utils";
+import { defineComponent, inject } from "vue";
 
 export default defineComponent({
   name: "AccordionHeader",
@@ -18,8 +17,8 @@ export default defineComponent({
     return {
       isOpen,
       toggle,
-      accordionId,
+      accordionId
     };
-  },
+  }
 });
 </script>

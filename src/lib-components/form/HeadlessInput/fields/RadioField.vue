@@ -1,24 +1,24 @@
 <template>
   <input
-      :id="`${id}-index-${index}`"
-      v-model="inputValue"
-      :aria-describedby="errorMessage && state === 'error' ? `${id}-error` : null"
-      :aria-invalid="errorMessage && state === 'error'"
-      :name="name"
-      :value="value"
-      type="radio"
-      @blur="handleBlur"
+    :id="`${id}-index-${index}`"
+    v-model="inputValue"
+    :aria-describedby="errorMessage && state === 'error' ? `${id}-error` : null"
+    :aria-invalid="errorMessage && state === 'error'"
+    :name="name"
+    :value="value"
+    type="radio"
+    @blur="handleBlur"
   />
 </template>
 <script lang="ts">
-import {injectionKeys, isMissingInjectable} from "@/utils";
-import {defineComponent, inject} from "vue";
+import { injectionKeys, isMissingInjectable } from "@/utils";
+import { defineComponent, inject } from "vue";
 
 export default defineComponent({
   name: "RadioField",
   props: {
-    value: {type: [String, Number], default: null},
-    index: {type: Number, required: true},
+    value: { type: [String, Number], default: null },
+    index: { type: Number, required: true }
   },
   emits: ["blur"],
   setup() {
@@ -35,8 +35,8 @@ export default defineComponent({
       name,
       handleBlur,
       errorMessage,
-      state,
+      state
     };
-  },
+  }
 });
 </script>

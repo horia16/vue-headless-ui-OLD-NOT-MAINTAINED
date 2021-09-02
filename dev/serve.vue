@@ -25,19 +25,19 @@
   </div>
 </template>
 <script lang="ts">
-import {defineComponent, ref} from "vue";
+import { defineComponent, ref } from "vue";
 import HeadlessAccordion from "@/lib-components/user-interface/HeadlessAccordion/HeadlessAccordion.vue";
 import AccordionHeader from "@/lib-components/user-interface/HeadlessAccordion/AccordionHeader.vue";
 import AccordionContent from "@/lib-components/user-interface/HeadlessAccordion/AccordionContent.vue";
 import AccordionToggle from "@/lib-components/user-interface/HeadlessAccordion/AccordionToggle.vue";
 
 export default defineComponent({
-  components: {AccordionToggle, AccordionContent, AccordionHeader, HeadlessAccordion},
+  components: { AccordionToggle, AccordionContent, AccordionHeader, HeadlessAccordion },
   name: "ServeDev",
   setup() {
     const tab = ref(0);
-    return {tab};
-  },
+    return { tab };
+  }
 });
 </script>
 

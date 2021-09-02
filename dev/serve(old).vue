@@ -1,14 +1,14 @@
 <template>
   <div>
     <headless-tabs
-        v-model="testData.tab"
-        :tabs="[{ name: 'Inputs' }, { name: 'Icons' }, { name: 'Accordions' }, { name: 'Dialogs' }]"
+      v-model="testData.tab"
+      :tabs="[{ name: 'Inputs' }, { name: 'Icons' }, { name: 'Accordions' }, { name: 'Dialogs' }]"
     >
       <div style="display: flex; gap: 1rem; flex-wrap:wrap">
         <tab-switch #default="{index, currentTab, switchTab, data}">
           <button
-              :style="{ backgroundColor: index == currentTab ? 'blue' : '', padding: '1rem', width: '8rem' }"
-              @click="switchTab(index)"
+            :style="{ backgroundColor: index == currentTab ? 'blue' : '', padding: '1rem', width: '8rem' }"
+            @click="switchTab(index)"
           >
             {{ data.name }}
           </button>
@@ -22,99 +22,99 @@
         </h1>
         <headless-form scrollToError @error="testError" @valid="testSubmit">
           <headless-input v-model="testData.input1" rules="required">
-            <input-label text="Test Label"/>
-            <input-field/>
-            <input-error/>
+            <input-label text="Test Label" />
+            <input-field />
+            <input-error />
           </headless-input>
 
           <headless-input v-model="testData.input2" rules="required">
-            <input-label text="Test Label"/>
+            <input-label text="Test Label" />
             <select-field
-                :options="[
+              :options="[
                 { name: 'test', value: 'test' },
-                { name: 'test2', value: 'test2' },
+                { name: 'test2', value: 'test2' }
               ]"
             />
-            <input-error/>
+            <input-error />
           </headless-input>
 
           <headless-input v-model="testData.input3" element="fieldset" rules="required">
-            <input-label element="legend" text="Test Label"/>
+            <input-label element="legend" text="Test Label" />
             <input-label isWrapper>
-              <radio-field :index="1" value="test"/>
+              <radio-field :index="1" value="test" />
               Test label
             </input-label>
             <input-label isWrapper>
-              <radio-field :index="2" value="test2"/>
+              <radio-field :index="2" value="test2" />
               Test label 2
             </input-label>
-            <input-error/>
+            <input-error />
           </headless-input>
 
           <headless-input v-model="testData.input4" element="fieldset" rules="required">
-            <input-label element="legend" text="Test Label"/>
+            <input-label element="legend" text="Test Label" />
             <input-label isWrapper>
-              <checkbox-field :index="1" value="test"/>
+              <checkbox-field :index="1" value="test" />
               Test checkbox label
             </input-label>
             <input-label isWrapper>
-              <checkbox-field :index="2" value="test2"/>
+              <checkbox-field :index="2" value="test2" />
               Test checkbox label 2
             </input-label>
-            <input-error/>
+            <input-error />
           </headless-input>
 
           <headless-input v-model="testData.input5" element="fieldset" rules="required">
-            <input-label element="legend" text="Test Label"/>
+            <input-label element="legend" text="Test Label" />
             <input-label isWrapper>
-              <checkbox-field :index="1" value="test"/>
+              <checkbox-field :index="1" value="test" />
               Test checkbox truthy/falsy
             </input-label>
-            <input-error/>
+            <input-error />
           </headless-input>
 
           <headless-input v-model="testData.input6" rules="required">
-            <input-label text="Test Label"/>
-            <textarea-field/>
-            <input-error/>
+            <input-label text="Test Label" />
+            <textarea-field />
+            <input-error />
           </headless-input>
 
           <h1>
             Dynamic Inputs Test
           </h1>
           <headless-input v-model="testData.dynamicRadio" element="fieldset" rules="required">
-            <input-label element="legend" text="Test Label"/>
+            <input-label element="legend" text="Test Label" />
             <input-label
-                v-for="(option, index) in [
+              v-for="(option, index) in [
                 { name: 'test', value: 'test' },
                 { name: 'test2', value: 'test2' },
                 { name: 'test3', value: 'test3' },
-                { name: 'test4', value: 'test4' },
+                { name: 'test4', value: 'test4' }
               ]"
-                :key="index"
-                isWrapper
+              :key="index"
+              isWrapper
             >
-              <radio-field :index="index" :value="option.value"/>
+              <radio-field :index="index" :value="option.value" />
               {{ option.name }}
             </input-label>
-            <input-error/>
+            <input-error />
           </headless-input>
           <headless-input v-model="testData.dynamicCheckbox" element="fieldset" rules="required">
-            <input-label element="legend" text="Test Label"/>
+            <input-label element="legend" text="Test Label" />
             <input-label
-                v-for="(option, index) in [
+              v-for="(option, index) in [
                 { name: 'test', value: 'test' },
                 { name: 'test2', value: 'test2' },
                 { name: 'test3', value: 'test3' },
-                { name: 'test4', value: 'test4' },
+                { name: 'test4', value: 'test4' }
               ]"
-                :key="index"
-                isWrapper
+              :key="index"
+              isWrapper
             >
-              <checkbox-field :index="index" :value="option.value"/>
+              <checkbox-field :index="index" :value="option.value" />
               {{ option.name }}
             </input-label>
-            <input-error/>
+            <input-error />
           </headless-input>
           <button>Submit</button>
         </headless-form>
@@ -126,16 +126,17 @@
         </h1>
         <div>
           <h4>Iconify</h4>
-          <headless-icon iconify name="noto:test-tube"/>
+          <headless-icon iconify name="noto:test-tube" />
         </div>
         <div>
           <h4>Font Icon</h4>
-          <headless-icon font name="mdi mdi-home"/>
+          <headless-icon font name="mdi mdi-home" />
         </div>
         <div>
           <h4>Inline Svg</h4>
           <headless-icon
-              :html="`<svg
+            :html="
+              `<svg
         xmlns='http://www.w3.org/2000/svg'
         xmlns:xlink='http://www.w3.org/1999/xlink'
         aria-hidden='true'
@@ -161,11 +162,11 @@
           fill='#2B3B47'
           d='M37 64.5c-3.2 0-6-1.6-7.6-4.3c-.2-.4-.2-.8 0-1.2c.2-.4.6-.6 1.1-.6h13.2c.4 0 .8.2 1.1.6c.2.4.2.8 0 1.2c-1.8 2.7-4.7 4.3-7.8 4.3z'
         /></svg
-      >`"
-              name="alien"
+      >`
+            "
+            name="alien"
           />
-        </div
-        >
+        </div>
       </headless-tab>
       <headless-tab key="3">
         <h1>
@@ -246,8 +247,8 @@
           Open Dialog
         </headless-button>
         <headless-dialog
-            v-model="testData.dialogOpen"
-            style="background-color:#00000080;display:flex; justify-content:center; align-items:center;"
+          v-model="testData.dialogOpen"
+          style="background-color:#00000080;display:flex; justify-content:center; align-items:center;"
         >
           <dialog-content style="background-color:#fff">
             <headless-button @click="testData.dialogOpen = false">
@@ -291,8 +292,8 @@
                   Open 2nd dialog
                 </headless-button>
                 <headless-dialog
-                    v-model="testData.dialogOpen2"
-                    style="background-color:#00000080;display:flex; justify-content:center; align-items:center;"
+                  v-model="testData.dialogOpen2"
+                  style="background-color:#00000080;display:flex; justify-content:center; align-items:center;"
                 >
                   <dialog-content style="background-color:#fff">
                     <headless-button @click="testData.dialogOpen2 = false">
@@ -310,7 +311,7 @@
   </div>
 </template>
 <script lang="ts">
-import {defineComponent, reactive} from "vue";
+import { defineComponent, reactive } from "vue";
 
 export default defineComponent({
   components: {},
@@ -328,7 +329,7 @@ export default defineComponent({
       dynamicCheckbox: [],
       accordion: false,
       dialogOpen: false,
-      dialogOpen2: false,
+      dialogOpen2: false
     });
 
     function testSubmit() {
@@ -342,9 +343,9 @@ export default defineComponent({
     return {
       testData,
       testSubmit,
-      testError,
+      testError
     };
-  },
+  }
 });
 </script>
 <style>
@@ -356,7 +357,7 @@ export default defineComponent({
 }
 
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */
-{
+ {
   opacity: 0;
 }
 </style>
