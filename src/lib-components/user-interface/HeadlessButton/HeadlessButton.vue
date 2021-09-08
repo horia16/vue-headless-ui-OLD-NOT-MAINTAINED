@@ -1,5 +1,5 @@
 <template>
-  <button>
+  <button :disabled="disabled || loading">
     <slot>
       {{ label }}
     </slot>
@@ -19,7 +19,8 @@ export default defineComponent({
   name: "HeadlessButton",
   props: {
     label: { type: [String, Number], default: null },
-    loading: { type: Boolean, default: false }
+    loading: { type: Boolean, default: false },
+    disabled: { type: Boolean, default: false }
   },
   setup() {}
 });

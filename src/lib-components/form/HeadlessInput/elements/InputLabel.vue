@@ -1,5 +1,5 @@
 <template>
-  <component :is="element" :for="isWrapper ? null : element === 'label' ? inputId : null">
+  <component :is="as" :for="isWrapper ? null : as === 'label' ? inputId : null">
     <slot>
       {{ text }}
     </slot>
@@ -13,7 +13,7 @@ export default defineComponent({
   name: "InputLabel",
   props: {
     text: { type: String, default: "" },
-    element: {
+    as: {
       type: String as PropType<"label" | "legend">,
       default: "label",
       validator: (value: string) => {

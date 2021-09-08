@@ -1,9 +1,9 @@
 <template>
-  <div v-if="errorMessage && state === 'error'" :id="`${id}-error`" data-error="true">
+  <component :is="as" v-if="errorMessage && state === 'error'" :id="`${id}-error`" data-error="true">
     <slot :errorMessage="errorMessage">
       {{ errorMessage }}
     </slot>
-  </div>
+  </component>
 </template>
 <script lang="ts">
 import { injectionKeys, isMissingInjectable } from "@/utils";
@@ -11,6 +11,12 @@ import { defineComponent, inject } from "vue";
 
 export default defineComponent({
   name: "InputError",
+  props: {
+    as: {
+      type: String,
+      default: "div"
+    }
+  },
   setup() {
     const errorMessage = inject(injectionKeys.FORM.ERROR_MESSAGE);
     const state = inject(injectionKeys.FORM.STATE);

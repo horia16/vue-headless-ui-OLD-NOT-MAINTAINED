@@ -1,7 +1,7 @@
 <template>
-  <div :aria-label="ariaLabel" role="tablist">
+  <component :is="as" aria-label="ariaLabel" role="tablist">
     <slot />
-  </div>
+  </component>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
@@ -12,7 +12,8 @@ export default defineComponent({
     ariaLabel: {
       type: [String, Number],
       default: "Tab list"
-    }
+    },
+    as: { type: String, default: "div" }
   },
   setup() {}
 });

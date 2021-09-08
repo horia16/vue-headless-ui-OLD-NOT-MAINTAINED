@@ -1,9 +1,6 @@
 <template>
-  <component
-    :is="element"
-    :key="name"
-    :style="!font ? { width: dimensions.width, height: dimensions.height, display } : ''"
-    ><slot>
+  <component :is="as" :key="name" :style="!font ? { width: dimensions.width, height: dimensions.height, display } : ''">
+    <slot>
       <span class="iconify" v-if="iconify" :data-icon="name" style="width:100%;height:100%"></span>
       <span
         v-else-if="font"
@@ -33,7 +30,7 @@ import { computed, defineComponent } from "vue";
 export default defineComponent({
   name: "HeadlessIcon",
   props: {
-    element: { type: String, default: "span" },
+    as: { type: String, default: "span" },
     name: { type: String, required: true },
     font: { type: Boolean, default: false },
     iconify: { type: Boolean, default: false },

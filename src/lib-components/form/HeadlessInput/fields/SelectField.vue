@@ -1,5 +1,5 @@
 <template>
-  <select :id="id" v-model="inputValue" :name="name" @blur="handleBlur">
+  <select :id="id" v-model="inputValue" @blur="handleBlur">
     <option v-if="placeholder" :value="null" disabled hidden selected> {{ placeholder }}</option>
     <option v-for="(option, index) in options" :key="index" :value="option.value">{{ option.name }}</option>
   </select>

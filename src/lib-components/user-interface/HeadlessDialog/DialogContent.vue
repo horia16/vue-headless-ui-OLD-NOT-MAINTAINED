@@ -66,6 +66,7 @@ export default defineComponent({
         }
       }
     }
+
     onMounted(() => {
       document.addEventListener("keydown", onKeyDown);
     });

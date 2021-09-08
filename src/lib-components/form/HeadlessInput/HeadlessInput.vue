@@ -1,5 +1,5 @@
 <template>
-  <component :is="element">
+  <component :is="as">
     <slot :errorMessage="errorMessage" :handleBlur="handleBlur" :meta="meta" :state="state" :validate="validate" />
   </component>
 </template>
@@ -15,7 +15,7 @@ export default defineComponent({
     id: { type: [String, Number], default: null },
     name: { type: [String, Number], default: null },
     rules: { type: [String, Function], default: null },
-    element: {
+    as: {
       type: String as PropType<"div" | "fieldset">,
       default: "div",
       validator: (value: string) => {

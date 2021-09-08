@@ -1,6 +1,6 @@
 /**
  * Create a random string
  */
-export default function randomString() {
-    return `rs${[...Array(30)].map(() => Math.random().toString(36)[2]).join("")}`;
+export default function randomString(length = 30) {
+  return [...Array(length)].map(() => Math.random().toString(36)[2]).join("");
 }

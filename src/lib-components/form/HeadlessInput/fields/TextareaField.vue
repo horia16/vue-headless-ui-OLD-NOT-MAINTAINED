@@ -4,7 +4,6 @@
     v-model="inputValue"
     :aria-describedby="errorMessage && state === 'error' ? `${id}-error` : null"
     :aria-invalid="errorMessage && state === 'error'"
-    :name="name"
     @blur="handleBlur"
   />
 </template>

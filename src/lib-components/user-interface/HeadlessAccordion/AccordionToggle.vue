@@ -7,6 +7,7 @@
 <script lang="ts">
 import { defineComponent, inject } from "vue";
 import { injectionKeys, isMissingInjectable } from "@/utils";
+
 export default defineComponent({
   name: "AccordionToggle",
   setup() {
