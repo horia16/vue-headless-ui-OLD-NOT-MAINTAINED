@@ -9,10 +9,11 @@ const STATE: InjectionKey<ComputedRef<"valid" | "error" | "clear">> = Symbol("ST
 const VALIDATE: InjectionKey<() => Promise<ValidationResult>> = Symbol("VALIDATE");
 const HANDLE_BLUR: InjectionKey<() => Promise<void>> = Symbol("HANDLE_BLUR");
 const META: InjectionKey<FieldMeta<unknown>> = Symbol("META");
-
+const OPTIONS: InjectionKey<Array<Record<string, any>> | null> = Symbol("OPTIONS");
 const FORM = {
   ID,
   INPUT_VALUE,
+  OPTIONS,
   NAME,
   ERROR_MESSAGE,
   STATE,

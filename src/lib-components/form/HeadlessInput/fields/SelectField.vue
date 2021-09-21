@@ -6,12 +6,11 @@
 </template>
 <script lang="ts">
 import { injectionKeys, isMissingInjectable } from "@/utils";
-import { defineComponent, inject, PropType } from "vue";
+import { defineComponent, inject } from "vue";
 
 export default defineComponent({
   name: "SelectField",
   props: {
-    options: { type: Object as PropType<{ name: string; value: any }>, required: true },
     placeholder: { type: String, default: null }
   },
   emits: ["blur"],
@@ -20,13 +19,16 @@ export default defineComponent({
     const id = inject(injectionKeys.FORM.ID);
     const name = inject(injectionKeys.FORM.NAME);
     const handleBlur = inject(injectionKeys.FORM.HANDLE_BLUR);
-    isMissingInjectable(id, inputValue, name, handleBlur);
+    const options = inject(injectionKeys.FORM.OPTIONS);
+    if (!options) console.warn("Missing options. Please make sure are passing options to the headless input.");
+    isMissingInjectable(id, inputValue, name, handleBlur, options);
 
     return {
       inputValue,
       id,
       name,
-      handleBlur
+      handleBlur,
+      options
     };
   }
 });

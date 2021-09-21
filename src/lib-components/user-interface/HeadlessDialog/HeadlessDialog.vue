@@ -3,7 +3,7 @@
     <div
       v-if="isOpen"
       :style="!fullScreen ? { top: 0, left: 0, position: 'fixed', width: '100vw', height: `${height}px`, zIndex } : ''"
-      v-bind="context.attrs"
+      v-bind="$attrs"
     >
       <slot />
     </div>
@@ -13,7 +13,6 @@
 import { useDialogModel } from "@/hooks/dialog";
 import { injectionKeys } from "@/utils";
 import { defineComponent, onBeforeUnmount, onMounted, provide, ref } from "vue";
-
 export default defineComponent({
   name: "HeadlessDialog",
   props: {
@@ -21,6 +20,7 @@ export default defineComponent({
     modelValue: { type: Boolean, default: null },
     fullScreen: { type: Boolean, default: false }
   },
+  inheritAttrs: false,
   setup(props, context) {
     const height = ref(window.innerHeight);
     const { value: isOpen, id } = useDialogModel(props, context);
@@ -37,7 +37,7 @@ export default defineComponent({
     onBeforeUnmount(() => {
       window.removeEventListener("resize", updateHeight);
     });
-    return { height, isOpen, context };
+    return { height, isOpen };
   }
 });
 </script>

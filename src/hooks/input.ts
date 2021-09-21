@@ -1,23 +1,40 @@
-import { computed, ComputedRef, Ref, SetupContext } from "vue";
+import { computed, ComputedRef, PropType, Ref, SetupContext, watch, WritableComputedRef } from "vue";
 import { useField } from "vee-validate";
 import { randomString } from "@/utils";
 
-export interface InputBaseProps {
-  modelValue: string | number | boolean | Array<any> | null;
-  id: string | number | null;
-  name: string | number | null;
-  rules: string | ((value: any) => boolean | string) | null;
+export type InputProps = Readonly<
+  {
+    modelValue?: unknown;
+    options: unknown;
+    id?: unknown;
+    name?: unknown;
+    rules?: unknown;
+    group?: unknown;
+    overrideState?: unknown;
+  } & {
+    modelValue: string | number | boolean | unknown[];
+    options: Record<string, any>[] | null;
+    id: string | number | null;
+    name: string | number | null;
+    rules: string | Function | null;
+    group: boolean;
+    overrideState: InputState | null;
+  }
+>;
 
-  [key: string]: any;
+export enum InputState {
+  Clear = "clear",
+  Valid = "valid",
+  Error = "error"
 }
 
-export interface FieldMeta<TValue> {
+export interface FieldMeta<T> {
   touched: boolean;
   dirty: boolean;
   valid: boolean;
   validated: boolean;
   pending: boolean;
-  initialValue?: TValue;
+  initialValue?: T;
 }
 
 export interface ValidationResult {
@@ -27,19 +44,44 @@ export interface ValidationResult {
 
 export interface FieldData {
   errorMessage: ComputedRef<string | undefined>;
-  value: Ref<unknown>;
+  value: Ref<unknown> | WritableComputedRef<unknown>;
   meta: FieldMeta<unknown>;
   validate: () => Promise<ValidationResult>;
 }
 
 /**
+ * The minimal props required by an input type component
+ */
+export const props = {
+  modelValue: { type: [String, Number, Boolean, Array], default: null },
+  options: { type: Array as PropType<Array<Record<string, any>>>, default: null },
+  id: { type: [String, Number], default: null },
+  name: { type: [String, Number], default: null },
+  rules: { type: [String, Function], default: null },
+  group: { type: Boolean, default: false },
+  overrideState: { type: String as PropType<InputState>, default: null }
+};
+/**
+ * The minimal emits required by an input component
+ */
+export const emits = {
+  blur: null,
+  "update:modelValue": (value: string | number | boolean | unknown[] | undefined) => {
+    if (value === undefined) {
+      console.warn("Input context returned undefined value");
+      return false;
+    }
+    return true;
+  }
+};
+
+/**
  * A more complex version of the useField provided by vee-validate.
  * This takes care of a few extra things like auto id and name generation.
  */
-export function useInput(props: InputBaseProps, context: SetupContext<any>) {
+export function useFieldContext(props: InputProps, context: SetupContext<any>) {
   // Use the provided id otherwise generate a random one
   const inputId = props.id ? `${props.id}` : `input-${randomString()}`;
-
   // Use the provided name or generate one based on the id
   const inputName = props.name ? `${props.name}` : `${inputId}-name`;
   // Use validation only if we don't have a parent state
@@ -47,24 +89,30 @@ export function useInput(props: InputBaseProps, context: SetupContext<any>) {
   const inputValue = computed({
     get: () => props.modelValue,
     set: val => {
-      // Update the vee-validate value
-      value.value = val;
       // Emit our new value
       context.emit("update:modelValue", val);
     }
+  });
+
+  watch(inputValue, newVal => {
+    // Update the vee-validate value
+    value.value = newVal;
   });
 
   /**
    * The state of our input value
    */
   const state = computed(() => {
+    if (props.overrideState != null) {
+      return props.overrideState;
+    }
     if (meta.touched && meta.validated) {
       if (meta.valid) {
-        return "valid";
+        return InputState.Valid;
       }
-      return "error";
+      return InputState.Error;
     }
-    return "clear";
+    return InputState.Clear;
   });
 
   /**
@@ -72,7 +120,7 @@ export function useInput(props: InputBaseProps, context: SetupContext<any>) {
    */
   async function handleBlur() {
     meta.touched = true;
-    await validate();
+    if (props.overrideState == null) await validate();
     // Emit it further to the parent component
     context.emit("blur");
   }
@@ -102,7 +150,6 @@ export function useInput(props: InputBaseProps, context: SetupContext<any>) {
     inputValue,
     inputName,
     inputId,
-    value,
     meta,
     state,
     validate,
@@ -113,7 +160,7 @@ export function useInput(props: InputBaseProps, context: SetupContext<any>) {
 /**
  * Simple model wrapper for the vue v-model directive.
  */
-export function useModel<T>(props: { modelValue: T; [key: string]: any }, context: SetupContext<any>) {
+export function useModel<T>(props: { modelValue: T } & Record<string, any>, context: SetupContext<any>) {
   return computed({
     get: () => props.modelValue,
     set: val => {

@@ -1,42 +1,27 @@
 <template>
   <div>
-    <headless-accordion self>
-      <accordion-header style="display:flex;border:1px solid black">
-        <accordion-toggle>Toggle</accordion-toggle>
-      </accordion-header>
-      <accordion-content style="border:1px solid black">
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-        <div>Content</div>
-      </accordion-content>
-    </headless-accordion>
+    <headless-input v-model="inputValue">
+      <input-label>
+        Test Label
+      </input-label>
+      <input-field />
+      <input-error />
+    </headless-input>
   </div>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import HeadlessAccordion from "@/lib-components/user-interface/HeadlessAccordion/HeadlessAccordion.vue";
-import AccordionHeader from "@/lib-components/user-interface/HeadlessAccordion/AccordionHeader.vue";
-import AccordionContent from "@/lib-components/user-interface/HeadlessAccordion/AccordionContent.vue";
-import AccordionToggle from "@/lib-components/user-interface/HeadlessAccordion/AccordionToggle.vue";
+import HeadlessInput from "@/lib-components/form/HeadlessInput/HeadlessInput.vue";
+import InputField from "@/lib-components/form/HeadlessInput/fields/InputField.vue";
+import InputLabel from "@/lib-components/form/HeadlessInput/elements/InputLabel.vue";
+import InputError from "@/lib-components/form/HeadlessInput/elements/InputError.vue";
 
 export default defineComponent({
-  components: { AccordionToggle, AccordionContent, AccordionHeader, HeadlessAccordion },
+  components: { InputError, InputLabel, InputField, HeadlessInput },
   name: "ServeDev",
   setup() {
-    const tab = ref(0);
-    return { tab };
+    const inputValue = ref<string | null>(null);
+    return { inputValue };
   }
 });
 </script>
