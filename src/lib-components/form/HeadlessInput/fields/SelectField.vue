@@ -1,7 +1,7 @@
 <template>
   <select :id="id" v-model="inputValue" @blur="handleBlur">
     <option v-if="placeholder" :value="null" disabled hidden selected> {{ placeholder }}</option>
-    <option v-for="(option, index) in options" :key="index" :value="option.value">{{ option.name }}</option>
+    <option v-for="(option, index) in options" :key="index" :value="option[valueKey]">{{ option[nameKey] }}</option>
   </select>
 </template>
 <script lang="ts">
@@ -11,7 +11,9 @@ import { defineComponent, inject } from "vue";
 export default defineComponent({
   name: "SelectField",
   props: {
-    placeholder: { type: String, default: null }
+    placeholder: { type: String, default: null },
+    valueKey: { type: String, default: "value" },
+    nameKey: { type: String, default: "name" }
   },
   emits: ["blur"],
   setup() {

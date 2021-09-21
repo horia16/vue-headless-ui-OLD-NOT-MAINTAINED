@@ -1,19 +1,18 @@
+import { computed, onBeforeUnmount, ref, Ref } from "vue";
 import { randomString } from "@/utils";
-import { computed, onBeforeUnmount, Ref, ref } from "vue";
 
 /**
- * Links a certain tab or tab-switch to their respective arrays, creating an unique id and the necessary events.
- * @param array - either the tabs or switches array
+ * Link a component to a given Ref Array, creating an unique id and the necessary events.
+ * @param array
  */
-export function useTabLink(array: Ref<Array<number | string>> | undefined) {
+export default function useArrayLink(array: Ref<Array<string>> | undefined | null) {
   // Create a random id
   const id: Ref<string> = ref(randomString());
-
   // If we do not have that id push it to the array
   if (!array?.value.find(x => x === id.value) && id.value) {
     array?.value.push(id.value);
   }
-  // Get the index of  the tab/switch in the array
+  // Get the index of element
   const index = computed(() => {
     if (array) {
       const index = array.value.findIndex(x => x == id.value);

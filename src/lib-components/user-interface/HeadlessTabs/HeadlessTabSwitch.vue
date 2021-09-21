@@ -3,8 +3,8 @@
     :id="id"
     ref="switchButton"
     :aria-controls="tabs[index]"
-    :aria-selected="index == currentTab"
-    :tabindex="index != currentTab ? -1 : undefined"
+    :aria-selected="index === currentTab"
+    :tabindex="index !== currentTab ? -1 : undefined"
     role="tab"
     type="button"
     @click="switchTab(index)"
@@ -14,9 +14,9 @@
   </button>
 </template>
 <script lang="ts">
-import { useTabLink } from "@/hooks/tabs";
 import { injectionKeys, isMissingInjectable } from "@/utils";
 import { defineComponent, inject, Ref, ref, watchEffect } from "vue";
+import useArrayLink from "@/hooks/arrayLink";
 
 export default defineComponent({
   name: "HeadlessTabSwitch",
@@ -59,7 +59,7 @@ export default defineComponent({
       }
     }
 
-    const { id, index } = useTabLink(switches);
+    const { id, index } = useArrayLink(switches);
 
     watchEffect(() => {
       if (currentTab?.value == index.value) {

@@ -4,7 +4,7 @@
   </component>
 </template>
 <script lang="ts">
-import { defineComponent, provide } from "vue";
+import { defineComponent, provide, ref } from "vue";
 import { emits, props, useFieldContext } from "@/hooks/input";
 import { injectionKeys } from "@/utils";
 
@@ -17,6 +17,7 @@ export default defineComponent({
       props,
       context
     );
+    const inputs = ref<Array<string>>([]);
     provide(injectionKeys.FORM.ID, inputId);
     provide(injectionKeys.FORM.INPUT_VALUE, inputValue);
     provide(injectionKeys.FORM.NAME, inputName);
@@ -26,12 +27,14 @@ export default defineComponent({
     provide(injectionKeys.FORM.HANDLE_BLUR, handleBlur);
     provide(injectionKeys.FORM.META, meta);
     provide(injectionKeys.FORM.OPTIONS, props.options);
+    provide(injectionKeys.FORM.INPUTS, inputs);
     return {
       errorMessage,
       state,
       validate,
       handleBlur,
-      meta
+      meta,
+      inputs
     };
   }
 });

@@ -13,7 +13,7 @@
 <script lang="ts">
 import { injectionKeys, isMissingInjectable } from "@/utils";
 import { defineComponent, inject } from "vue";
-import { useTabLink } from "@/hooks/tabs";
+import useArrayLink from "@/hooks/arrayLink";
 
 export default defineComponent({
   name: "HeadlessTab",
@@ -26,7 +26,7 @@ export default defineComponent({
     const currentTab = inject(injectionKeys.TABS.CURRENT_TAB);
     const switchTab = inject(injectionKeys.TABS.SWITCH_TAB);
     isMissingInjectable(tabs, switches, currentTab, switchTab);
-    const { id, index } = useTabLink(tabs);
+    const { id, index } = useArrayLink(tabs);
     return { currentTab, index, switchTab, id, switches };
   }
 });

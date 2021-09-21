@@ -1,6 +1,6 @@
 <template>
   <input
-    :id="`${id}-index-${index}`"
+    :id="inputId"
     v-model="inputValue"
     :aria-describedby="errorMessage && state === 'error' ? `${id}-error` : null"
     :aria-invalid="errorMessage && state === 'error'"
@@ -8,17 +8,18 @@
     :value="value"
     type="radio"
     @blur="handleBlur"
+    @change="meta.touched = true"
   />
 </template>
 <script lang="ts">
 import { injectionKeys, isMissingInjectable } from "@/utils";
 import { defineComponent, inject } from "vue";
+import useArrayLink from "@/hooks/arrayLink";
 
 export default defineComponent({
   name: "RadioField",
   props: {
-    value: { type: [String, Number], default: null },
-    index: { type: Number, required: true }
+    value: { type: [String, Number, Object, Array], default: null }
   },
   emits: ["blur"],
   setup() {
@@ -27,15 +28,20 @@ export default defineComponent({
     const name = inject(injectionKeys.FORM.NAME);
     const errorMessage = inject(injectionKeys.FORM.ERROR_MESSAGE);
     const state = inject(injectionKeys.FORM.STATE);
+    const meta = inject(injectionKeys.FORM.META);
     const handleBlur = inject(injectionKeys.FORM.HANDLE_BLUR);
-    isMissingInjectable(id, inputValue, name, errorMessage, state, handleBlur);
+    const inputs = inject(injectionKeys.FORM.INPUTS);
+    isMissingInjectable(id, inputValue, name, errorMessage, state, handleBlur, inputs);
+    const { id: inputId } = useArrayLink(inputs);
     return {
       inputValue,
       id,
+      inputId,
       name,
       handleBlur,
       errorMessage,
-      state
+      state,
+      meta
     };
   }
 });

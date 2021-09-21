@@ -1,6 +1,6 @@
 <template>
   <input
-    :id="`${id}-index-${index}`"
+    :id="inputId"
     v-model="inputValue"
     :aria-describedby="errorMessage && state === 'error' ? `${id}-error` : null"
     :aria-invalid="errorMessage && state === 'error'"
@@ -14,12 +14,12 @@
 <script lang="ts">
 import { defineComponent, inject } from "vue";
 import { injectionKeys, isMissingInjectable } from "@/utils";
+import useArrayLink from "@/hooks/arrayLink";
 
 export default defineComponent({
   name: "CheckboxField",
   props: {
-    value: { type: [String, Number], default: null },
-    index: { type: Number, required: true }
+    value: { type: [String, Number, Object, Array], default: null }
   },
   emits: ["blur"],
   setup() {
@@ -30,10 +30,13 @@ export default defineComponent({
     const state = inject(injectionKeys.FORM.STATE);
     const meta = inject(injectionKeys.FORM.META);
     const handleBlur = inject(injectionKeys.FORM.HANDLE_BLUR);
-    isMissingInjectable(id, name, errorMessage, state, meta, handleBlur);
+    const inputs = inject(injectionKeys.FORM.INPUTS);
+    isMissingInjectable(id, name, errorMessage, state, meta, handleBlur, inputs);
+    const { id: inputId } = useArrayLink(inputs);
     return {
       inputValue,
       id,
+      inputId,
       name,
       handleBlur,
       errorMessage,

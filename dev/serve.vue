@@ -1,28 +1,16 @@
 <template>
   <div>
-    <headless-input v-model="inputValue">
-      <input-label>
-        Test Label
-      </input-label>
-      <input-field />
-      <input-error />
-    </headless-input>
+    <inputs />
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from "vue";
-import HeadlessInput from "@/lib-components/form/HeadlessInput/HeadlessInput.vue";
-import InputField from "@/lib-components/form/HeadlessInput/fields/InputField.vue";
-import InputLabel from "@/lib-components/form/HeadlessInput/elements/InputLabel.vue";
-import InputError from "@/lib-components/form/HeadlessInput/elements/InputError.vue";
+import { defineComponent } from "vue";
+
+import Inputs from "./component-tests/Inputs.vue";
 
 export default defineComponent({
-  components: { InputError, InputLabel, InputField, HeadlessInput },
-  name: "ServeDev",
-  setup() {
-    const inputValue = ref<string | null>(null);
-    return { inputValue };
-  }
+  components: { Inputs },
+  name: "ServeDev"
 });
 </script>
 
