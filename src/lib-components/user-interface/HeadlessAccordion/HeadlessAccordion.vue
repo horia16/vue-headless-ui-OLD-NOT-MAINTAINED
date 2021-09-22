@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <component :is="as">
     <slot />
-  </div>
+  </component>
 </template>
 <script lang="ts">
 import { injectionKeys, randomString } from "@/utils";
@@ -14,6 +14,7 @@ export default defineComponent({
     self: { type: Boolean, default: false },
     openByDefault: { type: Boolean, default: false },
     animationDelay: { type: Number, default: 700 },
+    as: { type: String, default: "div" },
     id: { type: [String, Number], default: null }
   },
   setup(props, context) {

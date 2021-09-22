@@ -12,10 +12,9 @@ export default defineComponent({
   props: {
     scrollToError: { type: Boolean, default: false }
   },
-  emits: ["submitted", "error"],
+  emits: { submitted: null, failed: null },
   setup(props, context) {
     const { submit, errors, errorCount } = useHeadlessForm(props, context);
-
     return { submit, errors, errorCount };
   }
 });

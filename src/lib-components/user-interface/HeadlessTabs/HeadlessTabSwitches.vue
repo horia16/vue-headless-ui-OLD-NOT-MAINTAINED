@@ -1,5 +1,5 @@
 <template>
-  <component :is="as" aria-label="ariaLabel" role="tablist">
+  <component :is="as" :aria-label="ariaLabel" role="tablist">
     <slot />
   </component>
 </template>

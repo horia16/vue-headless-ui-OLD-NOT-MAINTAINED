@@ -12,37 +12,14 @@
   />
 </template>
 <script lang="ts">
-import { injectionKeys, isMissingInjectable } from "@/utils";
-import { defineComponent, inject } from "vue";
-import useArrayLink from "@/hooks/arrayLink";
+import { defineComponent } from "vue";
+import { props, setup } from "@/shared/fields/radio-checkbox";
+import { emits } from "@/shared/fields/common";
 
 export default defineComponent({
   name: "RadioField",
-  props: {
-    value: { type: [String, Number, Object, Array], default: null }
-  },
-  emits: ["blur"],
-  setup() {
-    const inputValue = inject(injectionKeys.FORM.INPUT_VALUE);
-    const id = inject(injectionKeys.FORM.ID);
-    const name = inject(injectionKeys.FORM.NAME);
-    const errorMessage = inject(injectionKeys.FORM.ERROR_MESSAGE);
-    const state = inject(injectionKeys.FORM.STATE);
-    const meta = inject(injectionKeys.FORM.META);
-    const handleBlur = inject(injectionKeys.FORM.HANDLE_BLUR);
-    const inputs = inject(injectionKeys.FORM.INPUTS);
-    isMissingInjectable(id, inputValue, name, errorMessage, state, handleBlur, inputs);
-    const { id: inputId } = useArrayLink(inputs);
-    return {
-      inputValue,
-      id,
-      inputId,
-      name,
-      handleBlur,
-      errorMessage,
-      state,
-      meta
-    };
-  }
+  props,
+  emits,
+  setup
 });
 </script>

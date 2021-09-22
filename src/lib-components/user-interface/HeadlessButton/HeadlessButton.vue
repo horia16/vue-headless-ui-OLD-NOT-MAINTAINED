@@ -1,5 +1,9 @@
 <template>
-  <button :disabled="disabled || loading">
+  <button
+    :disabled="disabled || loading"
+    :aria-busy="loading ? true : undefined"
+    :aria-live="loading ? 'polite' : undefined"
+  >
     <slot>
       {{ label }}
     </slot>

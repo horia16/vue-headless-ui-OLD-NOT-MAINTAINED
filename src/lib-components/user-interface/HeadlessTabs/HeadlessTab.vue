@@ -1,12 +1,5 @@
 <template>
-  <component
-    :is="as"
-    v-if="index === currentTab"
-    :id="id"
-    :aria-labelledby="switches[index]"
-    role="tabpanel"
-    tabindex="0"
-  >
+  <component :is="as" v-if="index === currentTab" :id="id" :aria-labelledby="switches[index]" role="tabpanel">
     <slot :currentTab="currentTab" :switchTab="switchTab" :tabIndex="index" />
   </component>
 </template>

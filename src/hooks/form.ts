@@ -18,19 +18,28 @@ export default function useHeadlessForm(
     triedToSubmit.value = true;
     await onSubmit(e);
     if (sendErrorEvent) {
+      context.emit("failed", errors.value);
       setTimeout(() => {
+        // Get the first error in the document
         let errorElement = document.querySelectorAll("[data-error]")[0];
-        if (errorElement) {
-          if (errorElement.parentNode) {
-            errorElement = errorElement.parentNode as Element;
+        if (errorElement && props.scrollToError) {
+          let parentElement = errorElement.parentElement;
+          let inputElement: HTMLElement | null = null;
+          // Try and extract the input element
+          while (parentElement !== null && inputElement === null) {
+            if (parentElement.getAttribute("data-input")) {
+              inputElement = parentElement;
+            } else {
+              parentElement = parentElement.parentElement;
+            }
           }
-          if (props.scrollToError) {
-            errorElement.scrollIntoView({
-              behavior: "smooth",
-              block: "center"
-            });
+          if (inputElement) {
+            errorElement = inputElement;
           }
-          context.emit("error", errors.value);
+          errorElement.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+          });
         }
       }, 200);
     }

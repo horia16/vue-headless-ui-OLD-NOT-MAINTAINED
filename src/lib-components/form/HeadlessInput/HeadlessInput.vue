@@ -1,5 +1,5 @@
 <template>
-  <component :is="group ? 'fieldset' : 'div'">
+  <component :is="group ? 'fieldset' : 'div'" data-input="true">
     <slot :errorMessage="errorMessage" :handleBlur="handleBlur" :meta="meta" :state="state" :validate="validate" />
   </component>
 </template>

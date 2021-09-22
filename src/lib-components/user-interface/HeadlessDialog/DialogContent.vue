@@ -16,10 +16,8 @@ export default defineComponent({
     const isOpen = inject(injectionKeys.DIALOG.IS_OPEN);
     const id = inject(injectionKeys.DIALOG.ID);
     isMissingInjectable(isOpen, id);
-
     const focusableElements = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
     let focusableContent: null | NodeListOf<HTMLElement> | undefined = null;
-
     function reloadDomArray(content: HTMLElement | null) {
       focusableContent = content?.querySelectorAll<HTMLElement>(focusableElements);
       // If we are already focused on an element form this array we should not not reset the focus.
@@ -38,35 +36,33 @@ export default defineComponent({
         }
       }
     }
-
-    function onKeyDown(e: KeyboardEvent) {
+    function onKeyDown(event: KeyboardEvent) {
       // If the last active dialog is this
       if (dialogs.value[dialogs.value.length - 1] == id) {
         if (isOpen?.value && focusableContent) {
-          const isTabPressed = e.key == "Tab";
+          const isTabPressed = event.key == "Tab";
 
-          if (e.key == "Escape") {
+          if (event.key == "Escape") {
             isOpen.value = false;
           }
 
           if (!isTabPressed) {
             return;
           }
-          if (e.shiftKey) {
+          if (event.shiftKey) {
             if (document.activeElement === focusableContent[0]) {
               focusableContent[focusableContent.length - 1].focus();
-              e.preventDefault();
+              event.preventDefault();
             }
           } else {
             if (document.activeElement === focusableContent[focusableContent.length - 1]) {
               focusableContent[0].focus();
-              e.preventDefault();
+              event.preventDefault();
             }
           }
         }
       }
     }
-
     onMounted(() => {
       document.addEventListener("keydown", onKeyDown);
     });

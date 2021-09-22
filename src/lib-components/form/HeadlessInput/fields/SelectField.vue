@@ -7,6 +7,7 @@
 <script lang="ts">
 import { injectionKeys, isMissingInjectable } from "@/utils";
 import { defineComponent, inject } from "vue";
+import { emits } from "@/shared/fields/common";
 
 export default defineComponent({
   name: "SelectField",
@@ -15,7 +16,7 @@ export default defineComponent({
     valueKey: { type: String, default: "value" },
     nameKey: { type: String, default: "name" }
   },
-  emits: ["blur"],
+  emits,
   setup() {
     const inputValue = inject(injectionKeys.FORM.INPUT_VALUE);
     const id = inject(injectionKeys.FORM.ID);

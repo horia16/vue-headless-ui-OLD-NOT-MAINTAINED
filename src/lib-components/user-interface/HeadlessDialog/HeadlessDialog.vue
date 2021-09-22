@@ -2,7 +2,7 @@
   <teleport to="body">
     <div
       v-if="isOpen"
-      :style="!fullScreen ? { top: 0, left: 0, position: 'fixed', width: '100vw', height: `${height}px`, zIndex } : ''"
+      :style="!fullScreen ? { top: 0, left: 0, position: 'fixed', width: '100vw', height: `${height}px`, zIndex } : {}"
       v-bind="$attrs"
     >
       <slot />
