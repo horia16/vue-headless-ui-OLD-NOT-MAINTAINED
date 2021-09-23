@@ -1,5 +1,6 @@
 import { FieldMeta, ValidationResult } from "@/hooks/input";
 import { ComputedRef, InjectionKey, Ref, WritableComputedRef } from "vue";
+import { DayMatrix } from "@/utils/calendar";
 
 const ID: InjectionKey<string> = Symbol("ID");
 const INPUT_VALUE: InjectionKey<WritableComputedRef<
@@ -47,9 +48,17 @@ const CURRENT_TAB: InjectionKey<WritableComputedRef<number>> = Symbol("CURRENT_T
 const SWITCH_TAB: InjectionKey<(index: number) => void> = Symbol("SWITCH_TAB");
 const TABS = { TAB_ARRAY, SWITCH_ARRAY, CURRENT_TAB, SWITCH_TAB };
 
+const MATRIX: InjectionKey<ComputedRef<DayMatrix>> = Symbol("MATRIX");
+const UPDATE_DAY: InjectionKey<(val: number) => void> = Symbol("UPDATE_DAY");
+const CALENDAR = {
+  MATRIX,
+  UPDATE_DAY
+};
+
 export default {
   FORM,
   ACCORDION,
   DIALOG,
-  TABS
+  TABS,
+  CALENDAR
 };
