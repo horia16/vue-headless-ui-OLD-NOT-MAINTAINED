@@ -5,7 +5,7 @@
 </template>
 <script lang="ts">
 import { injectionKeys, isMissingInjectable } from "@/utils";
-import { defineComponent, inject } from "vue";
+import { defineComponent, inject, ref } from "vue";
 import useArrayLink from "@/hooks/arrayLink";
 
 export default defineComponent({
@@ -15,7 +15,7 @@ export default defineComponent({
   },
   setup() {
     const tabs = inject(injectionKeys.TABS.TAB_ARRAY);
-    const switches = inject(injectionKeys.TABS.SWITCH_ARRAY);
+    const switches = inject(injectionKeys.TABS.SWITCH_ARRAY, ref([]));
     const currentTab = inject(injectionKeys.TABS.CURRENT_TAB);
     const switchTab = inject(injectionKeys.TABS.SWITCH_TAB);
     isMissingInjectable(tabs, switches, currentTab, switchTab);

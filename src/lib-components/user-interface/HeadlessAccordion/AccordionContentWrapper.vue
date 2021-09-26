@@ -8,11 +8,14 @@ import { defineComponent, onMounted, Ref, ref } from "vue";
 
 export default defineComponent({
   name: "AccordionContentWrapper",
-  setup({}, context) {
+  emits: {
+    mounted: null
+  },
+  setup(props, { emit }) {
     const content: Ref<null | HTMLElement> = ref(null);
     onMounted(() => {
       if (content.value) {
-        context.emit("mounted", content.value.scrollHeight);
+        emit("mounted", content.value.scrollHeight);
       }
     });
     return {

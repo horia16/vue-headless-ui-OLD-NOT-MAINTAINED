@@ -12,7 +12,7 @@ export type InputProps = Readonly<
     group?: unknown;
     overrideState?: unknown;
   } & {
-    modelValue: string | number | boolean | unknown[] | Record<string, any>;
+    modelValue: string | number | boolean | unknown[] | Record<string, any> | null;
     options: Record<string, any>[] | null;
     id: string | number | null;
     name: string | number | null;
@@ -55,7 +55,7 @@ export interface FieldData {
 export const props = {
   modelValue: {
     type: [String, Number, Boolean, Array, Object] as PropType<
-      string | number | boolean | unknown[] | Record<string, any>
+      string | number | boolean | unknown[] | Record<string, any> | null
     >,
     default: null
   },

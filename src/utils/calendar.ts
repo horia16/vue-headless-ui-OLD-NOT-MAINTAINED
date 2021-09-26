@@ -1,43 +1,94 @@
-export const months = [
-  { short: "Jan", long: "January" },
-  { short: "Feb", long: "February" },
-  { short: "Mar", long: "March" },
-  { short: "Apr", long: "April" },
-  { short: "May", long: "May" },
-  { short: "Jun", long: "June" },
-  { short: "Jul", long: "July" },
-  { short: "Aug", long: "August" },
-  { short: "Sep", long: "September" },
-  { short: "Oct", long: "October" },
-  { short: "Nov", long: "November" },
-  { short: "Dec", long: "December" }
-];
-export const weekdays = [
-  { short: "Mo", long: "Monday" },
-  { short: "Tu", long: "Tuesday" },
-  { short: "We", long: "Wednesday" },
-  { short: "Th", long: "Thursday" },
-  { short: "Fr", long: "Friday" },
-  { short: "Sa", long: "Saturday" },
-  { short: "Su", long: "Sunday" }
+export const monthNames = {
+  data: [
+    { short: "Jan", long: "January" },
+    { short: "Feb", long: "February" },
+    { short: "Mar", long: "March" },
+    { short: "Apr", long: "April" },
+    { short: "May", long: "May" },
+    { short: "Jun", long: "June" },
+    { short: "Jul", long: "July" },
+    { short: "Aug", long: "August" },
+    { short: "Sep", long: "September" },
+    { short: "Oct", long: "October" },
+    { short: "Nov", long: "November" },
+    { short: "Dec", long: "December" }
+  ],
+  get(month: number) {
+    return this.data[month - 1];
+  }
+};
+
+export const weekdayNames = [
+  { short: "Mo", medium: "Mon", long: "Monday" },
+  { short: "Tu", medium: "Tue", long: "Tuesday" },
+  { short: "We", medium: "Wed", long: "Wednesday" },
+  { short: "Th", medium: "Thu", long: "Thursday" },
+  { short: "Fr", medium: "Fri", long: "Friday" },
+  { short: "Sa", medium: "Sat", long: "Saturday" },
+  { short: "Su", medium: "Sun", long: "Sunday" }
 ];
 
-export type DayMatrix = Array<
-  Array<
-    | {
-        pos: number;
-        date: Date;
-        meta: { disabled: boolean; selected: boolean; inRange: boolean };
+export interface DayObject {
+  number: number;
+  date: Date;
+  disabled: boolean;
+  meta: Record<string, any>;
+}
+
+export interface CalendarModifiers {
+  disablePastDates: boolean;
+  disableFutureDates: boolean;
+  disabledDates: Array<Date | string>;
+  custom: Array<(dayObject: DayObject) => DayObject>;
+}
+
+export type DayMatrix = Array<Array<DayObject | undefined | null>>;
+
+export interface DateObject {
+  d: number | null;
+  m: number;
+  y: number;
+}
+
+export function compareDate(
+  date: Date | string | null | undefined,
+  now: Date | string | null | undefined,
+  comparator: "future" | "past" | "equal"
+) {
+  if (!date || !now) return false;
+  const d =
+    typeof date === "string" ? new Date(date).setHours(0, 0, 0, 0) : new Date(date.getTime()).setHours(0, 0, 0, 0);
+  const n = typeof now === "string" ? new Date(now).setHours(0, 0, 0, 0) : new Date(now.getTime()).setHours(0, 0, 0, 0);
+  return comparator === "past" ? d < n : comparator === "future" ? d > n : d == n;
+}
+
+export function computeDay(dayObject: DayObject, modifiers: CalendarModifiers | null = null) {
+  let day = { ...dayObject };
+
+  if (modifiers) {
+    if (modifiers.disablePastDates && compareDate(day.date, new Date(), "past")) {
+      day.disabled = true;
+    }
+    if (modifiers.disableFutureDates && compareDate(day.date, new Date(), "future")) {
+      day.disabled = true;
+    }
+    for (let i = 0; i < modifiers.disabledDates.length; i++) {
+      if (compareDate(day.date, modifiers.disabledDates[i], "equal")) {
+        day.disabled = true;
+        break;
       }
-    | undefined
-    | null
-  >
->;
+    }
+    for (let i = 0; i < modifiers.custom.length; i++) {
+      day = modifiers.custom[i](day);
+    }
+  }
+  return day;
+}
 
 /**
  * Create a 2d array with the days form a specific month of the year.
  */
-export function createDayMapping(month: number, year: number) {
+export function createDayMapping(month: number, year: number, modifiers: CalendarModifiers | null = null) {
   // Js months always start with 0;
   const monthIndex = month - 1;
   const extremes = {
@@ -64,15 +115,15 @@ export function createDayMapping(month: number, year: number) {
         // Skip this column
         startOffset--;
       } else {
-        matrix[i][j] = {
-          pos: currentDay,
-          date: new Date(year, monthIndex, currentDay),
-          meta: {
+        matrix[i][j] = computeDay(
+          {
+            number: currentDay,
+            date: new Date(year, monthIndex, currentDay),
             disabled: false,
-            selected: false,
-            inRange: false
-          }
-        };
+            meta: {}
+          },
+          modifiers
+        );
         // If our current day is the last of the month break the loop
         if (currentDay == extremes.last.getDate()) {
           break;
@@ -114,12 +165,13 @@ export function shiftMatrix(matrix: DayMatrix) {
  * Convert an ISO string or a Date object to a plain js object.
  * @param value
  */
-export function convertToObjectDate(value: string | Date | undefined) {
+export function convertToDateObject(value: string | Date | undefined | null) {
   if (!value) {
+    const today = new Date();
     return {
-      d: undefined,
-      m: undefined,
-      y: undefined
+      d: today.getDate(),
+      m: today.getMonth() + 1,
+      y: today.getFullYear()
     };
   }
   let date: Date;
@@ -135,8 +187,15 @@ export function convertToObjectDate(value: string | Date | undefined) {
   };
 }
 
-export function convertToDate(value: { d: number; m: number; y: number }, mode: "date" | "string" = "date") {
-  const isoString = `${value.y}-${value.m < 10 ? `0${value.m}` : value.m}-${value.d < 10 ? `0${value.d}` : value.d}`;
+export function lastDayOfMonth(month: number, year: number) {
+  const monthIndex = month - 1;
+  return new Date(year, monthIndex + 1, 0).getDate();
+}
+
+export function convertToDate(value: DateObject, mode: "date" | "string" = "date") {
+  const isoString = `${value.y}-${value.m < 10 ? `0${value.m}` : value.m}-${
+    value.d ? (value.d < 10 ? `0${value.d}` : value.d) : "01"
+  }`;
   if (mode == "date") return new Date(isoString);
   return isoString;
 }

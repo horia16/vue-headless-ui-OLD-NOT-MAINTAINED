@@ -17,6 +17,7 @@ export default defineComponent({
       props,
       context
     );
+    const thing: Array<string> = [];
     const inputs = ref<Array<string>>([]);
     provide(injectionKeys.FORM.ID, inputId);
     provide(injectionKeys.FORM.INPUT_VALUE, inputValue);
@@ -34,7 +35,8 @@ export default defineComponent({
       validate,
       handleBlur,
       meta,
-      inputs
+      inputs,
+      thing
     };
   }
 });

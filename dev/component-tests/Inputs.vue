@@ -28,7 +28,7 @@
       <input-label>
         Select, object as value
       </input-label>
-      <select-field />
+      <select-field placeholder="test" />
       <input-error />
     </headless-input>
 

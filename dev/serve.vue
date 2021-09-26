@@ -1,15 +1,35 @@
 <template>
   <div>
     <inputs />
-    <headless-calendar v-model="date" #default="{day}">
-      <h-calendar-days #default="{dayObject, updateDay}">
+    <headless-calendar v-model="date" :disabled-dates="['2021-09-24', new Date()]">
+      <h-calendar-controls
+        v-slot="{ month, updateMonth, monthNames }"
+        style="display:flex; margin-bottom: 1rem; margin-top: 1rem"
+      >
+        <button @click="updateMonth(month - 1)">
+          -
+        </button>
+        <div>
+          {{ monthNames.get(month).short }}
+        </div>
+        <button @click="updateMonth(month + 1)">
+          +
+        </button>
+      </h-calendar-controls>
+      <h-calendar-weekdays v-slot="{ weekday }">
+        <div style="width:2rem;height:2rem;display: flex; justify-content: center; align-items: center">
+          {{ weekday.medium }}
+        </div>
+      </h-calendar-weekdays>
+      <h-calendar-days v-slot="{ dayObject, updateDay, selected }">
         <button
           v-if="dayObject"
           style="width:2rem;height:2rem;"
-          :style="{ backgroundColor: dayObject.pos === day ? 'blue' : undefined }"
-          @click="updateDay(dayObject.pos)"
+          :disabled="dayObject.disabled"
+          :style="selected ? 'background-color: blue;' : ''"
+          @click="updateDay(dayObject.number)"
         >
-          {{ dayObject.pos }}
+          {{ dayObject.number }}
         </button>
       </h-calendar-days>
     </headless-calendar>
@@ -21,12 +41,14 @@ import { defineComponent, ref } from "vue";
 import Inputs from "./component-tests/Inputs.vue";
 import HeadlessCalendar from "@/lib-components/user-interface/HeadlessCalendar/HeadlessCalendar.vue";
 import HCalendarDays from "@/lib-components/user-interface/HeadlessCalendar/HCalendarDays.vue";
+import HCalendarControls from "@/lib-components/user-interface/HeadlessCalendar/HCalendarControls.vue";
+import HCalendarWeekdays from "@/lib-components/user-interface/HeadlessCalendar/HCalendarWeekdays.vue";
 
 export default defineComponent({
-  components: { HCalendarDays, HeadlessCalendar, Inputs },
   name: "ServeDev",
+  components: { HCalendarWeekdays, HCalendarControls, HCalendarDays, HeadlessCalendar, Inputs },
   setup() {
-    const date = ref("2020-01-01");
+    const date = ref(null);
     return {
       date
     };

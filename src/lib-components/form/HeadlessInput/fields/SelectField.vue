@@ -25,11 +25,9 @@ export default defineComponent({
     const options = inject(injectionKeys.FORM.OPTIONS);
     if (!options) console.warn("Missing options. Please make sure are passing options to the headless input.");
     isMissingInjectable(id, inputValue, name, handleBlur, options);
-
     return {
       inputValue,
       id,
-      name,
       handleBlur,
       options
     };

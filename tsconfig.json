@@ -6,7 +6,7 @@
     "declaration": true,
     "declarationDir": "dist/types",
     "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "noUnusedParameters": false,
     "importHelpers": true,
     "moduleResolution": "node",
     "experimentalDecorators": true,

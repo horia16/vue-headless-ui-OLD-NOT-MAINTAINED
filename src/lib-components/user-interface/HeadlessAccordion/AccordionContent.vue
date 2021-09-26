@@ -31,8 +31,11 @@ export default defineComponent({
     const height: Ref<number | null> = ref(isOpen?.value ? null : 0);
     const overflow = ref("hidden");
 
+    // eslint-disable-next-line no-undef
     let zeroOutHeightTimeout: NodeJS.Timeout | null = null;
+    // eslint-disable-next-line no-undef
     let setInvisibleTimeout: NodeJS.Timeout | null = null;
+    // eslint-disable-next-line no-undef
     let setHeightAutoTimeout: NodeJS.Timeout | null = null;
 
     function setHeightAuto() {

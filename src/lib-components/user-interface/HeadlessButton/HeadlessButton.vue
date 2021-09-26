@@ -21,7 +21,6 @@ export default defineComponent({
     label: { type: [String, Number], default: null },
     loading: { type: Boolean, default: false },
     disabled: { type: Boolean, default: false }
-  },
-  setup() {}
+  }
 });
 </script>
