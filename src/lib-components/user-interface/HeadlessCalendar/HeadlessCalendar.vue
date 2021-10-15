@@ -68,7 +68,9 @@ export default defineComponent({
       date.d = day;
       updateModel();
     }
-
+    /**
+     * Update the month of our date. Negative values or values bigger than 12 will change the year.
+     */
     function updateMonth(month: number) {
       if (month < 1) {
         date.m = 12;

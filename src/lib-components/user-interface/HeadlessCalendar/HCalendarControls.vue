@@ -27,6 +27,9 @@ export default defineComponent({
     const updateDay = inject(injectionKeys.CALENDAR.UPDATE_DAY, () => {
       return;
     });
+    /**
+     * Update the month of our date. Negative values or values bigger than 12 will change the year.
+     */
     const updateMonth = inject(injectionKeys.CALENDAR.UPDATE_MONTH, () => {
       return;
     });
