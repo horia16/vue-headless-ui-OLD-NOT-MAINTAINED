@@ -1,32 +1,23 @@
-export const monthNames = {
-  data: [
-    { short: "Jan", long: "January" },
-    { short: "Feb", long: "February" },
-    { short: "Mar", long: "March" },
-    { short: "Apr", long: "April" },
-    { short: "May", long: "May" },
-    { short: "Jun", long: "June" },
-    { short: "Jul", long: "July" },
-    { short: "Aug", long: "August" },
-    { short: "Sep", long: "September" },
-    { short: "Oct", long: "October" },
-    { short: "Nov", long: "November" },
-    { short: "Dec", long: "December" }
-  ],
-  get(month: number) {
-    return this.data[month - 1];
+export function getMonthNames(
+  locale = "en-US",
+  length: "short" | "numeric" | "2-digit" | "long" | "narrow" | undefined = "short"
+) {
+  const formatter = new Intl.DateTimeFormat(locale, { month: length });
+  const months: Array<string> = [];
+  for (let index = 0; index <= 11; index++) {
+    months.push(formatter.format(new Date(1970, index)));
   }
-};
+  return months;
+}
 
-export const weekdayNames = [
-  { short: "Mo", medium: "Mon", long: "Monday" },
-  { short: "Tu", medium: "Tue", long: "Tuesday" },
-  { short: "We", medium: "Wed", long: "Wednesday" },
-  { short: "Th", medium: "Thu", long: "Thursday" },
-  { short: "Fr", medium: "Fri", long: "Friday" },
-  { short: "Sa", medium: "Sat", long: "Saturday" },
-  { short: "Su", medium: "Sun", long: "Sunday" }
-];
+export function getWeekdayNames(locale = "en-US", length: "short" | "long" | "narrow" | undefined = "short") {
+  const formatter = new Intl.DateTimeFormat(locale, { weekday: length });
+  const weekdays: Array<string> = [];
+  for (let index = 1; index <= 7; index++) {
+    weekdays.push(formatter.format(new Date(2021, 2, index)));
+  }
+  return weekdays;
+}
 
 export interface DayObject {
   number: number;

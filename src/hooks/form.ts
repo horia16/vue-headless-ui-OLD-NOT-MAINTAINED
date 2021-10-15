@@ -2,8 +2,11 @@ import { useForm } from "vee-validate";
 import { computed, ref, SetupContext } from "vue";
 
 export default function useHeadlessForm(
-  props: { scrollToError: boolean; [key: string]: any },
-  context: SetupContext<any>
+  props: { scrollToError: boolean },
+  context: SetupContext<{
+    submitted: null;
+    failed: null;
+  }>
 ) {
   const { handleSubmit, errors } = useForm();
   const triedToSubmit = ref(false);

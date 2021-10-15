@@ -3,7 +3,7 @@ import { computed, ref, Ref, SetupContext, watch } from "vue";
 
 export const dialogs: Ref<Array<string>> = ref([]);
 
-export function useDialogModel(props: { modelValue: boolean; [key: string]: any }, context: SetupContext<any>) {
+export function useDialogModel(props: { modelValue: boolean } & Record<string, any>, context: SetupContext<any>) {
   /**
    * Random dialog id.
    */

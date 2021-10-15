@@ -2,7 +2,7 @@
   <table>
     <tr v-for="(array, i) in matrix" :key="i">
       <td v-for="(day, j) in array" :key="j">
-        <slot :dayObject="day" :updateDay="updateDay" :selected="compare(day)">
+        <slot :day-object="day" :update-day="updateDay" :selected="compare(day)">
           {{ day ? day.number : undefined }}
         </slot>
       </td>
@@ -13,7 +13,6 @@
 import { computed, defineComponent, inject } from "vue";
 import { injectionKeys } from "@/utils";
 import { compareDate, DayObject } from "@/utils/calendar";
-
 export default defineComponent({
   name: "HCalendarDays",
   setup() {

@@ -28,7 +28,8 @@ export default defineComponent({
     disablePastDates: { type: Boolean, default: false },
     disableFutureDates: { type: Boolean, default: false },
     disabledDates: { type: Array as PropType<Array<Date | string>>, default: () => [] },
-    customModifiers: { type: Array as PropType<Array<(day: DayObject) => DayObject>>, default: () => [] }
+    customModifiers: { type: Array as PropType<Array<(day: DayObject) => DayObject>>, default: () => [] },
+    locale: { type: String, default: "en-US" }
   },
   emits: {
     "update:modelValue": null
@@ -37,6 +38,9 @@ export default defineComponent({
     const date = reactive<DateObject>(
       props.modelValue ? convertToDateObject(props.modelValue) : { ...convertToDateObject(new Date()), d: null }
     );
+    /**
+     * The operating mode of the calendar. Date or string
+     */
     const mode = computed(() =>
       props.useDate == null
         ? typeof props.modelValue === "string"
@@ -95,6 +99,8 @@ export default defineComponent({
         ? createDayMapping(date.m, date.y, modifiers.value)
         : shiftMatrix(createDayMapping(date.m, date.y, modifiers.value))
     );
+    const locale = computed(() => props.locale);
+    provide(injectionKeys.CALENDAR.LOCALE, locale);
     provide(injectionKeys.CALENDAR.MATRIX, matrix);
     provide(injectionKeys.CALENDAR.UPDATE_DAY, updateDay);
     provide(injectionKeys.CALENDAR.UPDATE_MONTH, updateMonth);

@@ -8,7 +8,7 @@
     role="region"
     @mounted="contentMounted"
   >
-    <slot />
+    <slot :open="isOpen" :toggle="toggle" />
   </accordion-content-wrapper>
 </template>
 <script lang="ts">

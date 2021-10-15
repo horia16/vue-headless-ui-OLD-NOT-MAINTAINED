@@ -13,16 +13,17 @@
   </component>
 </template>
 <script lang="ts">
-import { defineComponent, inject } from "vue";
+import { defineComponent, inject, computed, PropType } from "vue";
 import { injectionKeys } from "@/utils";
-import { monthNames, weekdayNames } from "@/utils/calendar";
+import { getMonthNames, getWeekdayNames } from "@/utils/calendar";
 
 export default defineComponent({
   name: "HCalendarControls",
   props: {
-    as: { type: String, default: "div" }
+    as: { type: String, default: "div" },
+    length: { type: String as PropType<"short" | "long" | "narrow">, default: "short" }
   },
-  setup() {
+  setup(props) {
     const updateDay = inject(injectionKeys.CALENDAR.UPDATE_DAY, () => {
       return;
     });
@@ -33,6 +34,9 @@ export default defineComponent({
       return;
     });
     const date = inject(injectionKeys.CALENDAR.DATE_OBJECT, { d: 0, m: 0, y: 0 });
+    const locale = inject(injectionKeys.CALENDAR.LOCALE);
+    const weekdayNames = computed(() => getWeekdayNames(locale?.value ?? "en-US", props.length));
+    const monthNames = computed(() => getMonthNames(locale?.value ?? "en-US", props.length));
     return {
       updateDay,
       updateMonth,
