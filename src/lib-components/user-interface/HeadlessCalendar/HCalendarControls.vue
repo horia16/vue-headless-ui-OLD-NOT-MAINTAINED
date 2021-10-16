@@ -1,14 +1,15 @@
 <template>
   <component :is="as">
     <slot
-      :updateDay="updateDay"
-      :updateMonth="updateMonth"
-      :updateYear="updateYear"
+      :update-day="updateDay"
+      :update-month="updateMonth"
+      :update-year="updateYear"
       :day="date.d"
       :month="date.m"
       :year="date.y"
-      :weekdayNames="weekdayNames"
-      :monthNames="monthNames"
+      :weekday-names="weekdayNames"
+      :month-names="monthNames"
+      :month-name="monthNames[date.m - 1]"
     />
   </component>
 </template>
@@ -21,7 +22,7 @@ export default defineComponent({
   name: "HCalendarControls",
   props: {
     as: { type: String, default: "div" },
-    length: { type: String as PropType<"short" | "long" | "narrow">, default: "short" }
+    nameLength: { type: String as PropType<"short" | "long" | "narrow">, default: "short" }
   },
   setup(props) {
     const updateDay = inject(injectionKeys.CALENDAR.UPDATE_DAY, () => {
@@ -38,8 +39,8 @@ export default defineComponent({
     });
     const date = inject(injectionKeys.CALENDAR.DATE_OBJECT, { d: 0, m: 0, y: 0 });
     const locale = inject(injectionKeys.CALENDAR.LOCALE);
-    const weekdayNames = computed(() => getWeekdayNames(locale?.value ?? "en-US", props.length));
-    const monthNames = computed(() => getMonthNames(locale?.value ?? "en-US", props.length));
+    const weekdayNames = computed(() => getWeekdayNames(locale?.value ?? "en-US", props.nameLength));
+    const monthNames = computed(() => getMonthNames(locale?.value ?? "en-US", props.nameLength));
     return {
       updateDay,
       updateMonth,

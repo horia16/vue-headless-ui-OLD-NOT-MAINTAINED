@@ -19,7 +19,7 @@ export default defineComponent({
   name: "HeadlessCalendar",
   props: {
     modelValue: {
-      type: [String, Date] as PropType<string | Date | null>,
+      type: [String, Date, Array] as PropType<string | Date | null | Array<string | Date | null>>,
       default: null
     },
     as: { type: String, default: "div" },
@@ -29,15 +29,19 @@ export default defineComponent({
     disableFutureDates: { type: Boolean, default: false },
     disabledDates: { type: Array as PropType<Array<Date | string>>, default: () => [] },
     customModifiers: { type: Array as PropType<Array<(day: DayObject) => DayObject>>, default: () => [] },
-    locale: { type: String, default: "en-US" }
+    locale: { type: String, default: "en-US" },
+    isRange: { type: Boolean, default: false }
   },
   emits: {
     "update:modelValue": null
   },
   setup(props, { emit }) {
     const date = reactive<DateObject>(
-      props.modelValue ? convertToDateObject(props.modelValue) : { ...convertToDateObject(new Date()), d: null }
+      !props.isRange && props.modelValue && (typeof props.modelValue === "string" || props.modelValue instanceof Date)
+        ? convertToDateObject(props.modelValue)
+        : { ...convertToDateObject(new Date()), d: null }
     );
+
     /**
      * The operating mode of the calendar. Date or string
      */
@@ -60,7 +64,28 @@ export default defineComponent({
     });
     function updateModel() {
       if (date.d && date.m && date.y) {
-        model.value = convertToDate(date, mode.value);
+        if (!props.isRange) {
+          model.value = convertToDate(date, mode.value);
+        } else {
+          if (!model.value) {
+            model.value = [convertToDate(date, mode.value)];
+          } else if (Array.isArray(model.value)) {
+            switch (model.value.length) {
+              case 0:
+                model.value.push(convertToDate(date, mode.value));
+                break;
+              case 1:
+                model.value.push(convertToDate(date, mode.value));
+                break;
+              case 2:
+                model.value = [convertToDate(date, mode.value)];
+                break;
+              default:
+                model.value = [convertToDate(date, mode.value)];
+                break;
+            }
+          }
+        }
       }
     }
 
@@ -102,6 +127,7 @@ export default defineComponent({
         : shiftMatrix(createDayMapping(date.m, date.y, modifiers.value))
     );
     const locale = computed(() => props.locale);
+    const startSunday = computed(() => props.startSunday);
     provide(injectionKeys.CALENDAR.LOCALE, locale);
     provide(injectionKeys.CALENDAR.MATRIX, matrix);
     provide(injectionKeys.CALENDAR.UPDATE_DAY, updateDay);
@@ -109,8 +135,6 @@ export default defineComponent({
     provide(injectionKeys.CALENDAR.UPDATE_YEAR, updateYear);
     provide(injectionKeys.CALENDAR.DATE_OBJECT, date);
     provide(injectionKeys.CALENDAR.MODEL, model);
-
-    const startSunday = computed(() => props.startSunday);
     provide(injectionKeys.CALENDAR.START_SUNDAY, startSunday);
     return {
       matrix,

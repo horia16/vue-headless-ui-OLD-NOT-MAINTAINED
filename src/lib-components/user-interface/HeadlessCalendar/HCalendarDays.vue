@@ -25,7 +25,14 @@ export default defineComponent({
     });
     const model = inject(injectionKeys.CALENDAR.MODEL);
     function compare(day: DayObject | undefined | null) {
-      return compareDate(day ? day.date : null, model?.value, "equal");
+      if (Array.isArray(model?.value)) {
+        return (
+          compareDate(day ? day.date : null, model?.value[0], "equal") ||
+          compareDate(day ? day.date : null, model?.value[1], "equal")
+        );
+      } else {
+        return compareDate(day ? day.date : null, model?.value, "equal");
+      }
     }
 
     return {

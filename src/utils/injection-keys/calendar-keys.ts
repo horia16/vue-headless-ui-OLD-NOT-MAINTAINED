@@ -7,7 +7,7 @@ const UPDATE_MONTH: InjectionKey<(val: number) => void> = Symbol("UPDATE_MONTH")
 const UPDATE_YEAR: InjectionKey<(val: number) => void> = Symbol("UPDATE_YEAR");
 const DATE_OBJECT: InjectionKey<DateObject> = Symbol("DATE_OBJECT");
 const START_SUNDAY: InjectionKey<ComputedRef<boolean>> = Symbol("START_SUNDAY");
-const MODEL: InjectionKey<WritableComputedRef<string | Date>> = Symbol("MODEL");
+const MODEL: InjectionKey<WritableComputedRef<string | Date | null | Array<string | Date | null>>> = Symbol("MODEL");
 const LOCALE: InjectionKey<ComputedRef<string>> = Symbol("LOCALE");
 export default {
   MATRIX,

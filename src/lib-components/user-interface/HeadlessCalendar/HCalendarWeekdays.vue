@@ -14,7 +14,7 @@ import { getWeekdayNames } from "@/utils/calendar";
 
 export default defineComponent({
   name: "HCalendarWeekdays",
-  props: { length: { type: String as PropType<"short" | "long" | "narrow">, default: "short" } },
+  props: { nameLength: { type: String as PropType<"short" | "long" | "narrow">, default: "short" } },
   setup(props) {
     const startSunday = inject(
       injectionKeys.CALENDAR.START_SUNDAY,
@@ -25,7 +25,7 @@ export default defineComponent({
       return array;
     }
     const locale = inject(injectionKeys.CALENDAR.LOCALE);
-    const weekdayNames = computed(() => getWeekdayNames(locale?.value ?? "en-US", props.length));
+    const weekdayNames = computed(() => getWeekdayNames(locale?.value ?? "en-US", props.nameLength));
     const weekdays = computed(() => {
       return startSunday.value ? swapFirstLast(weekdayNames.value) : weekdayNames.value;
     });

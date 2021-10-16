@@ -1,17 +1,23 @@
 <template>
   <div>
     <inputs />
-    <headless-calendar v-model="date" :disabled-dates="['2021-09-24', new Date()]" locale="ro">
+    <headless-calendar
+      is-range
+      v-model="date"
+      :use-date="false"
+      :disabled-dates="['2021-09-24', new Date()]"
+      locale="en"
+    >
       <h-calendar-controls
         length="long"
-        v-slot="{ month, updateMonth, monthNames }"
+        v-slot="{ month, updateMonth, monthName }"
         style="display:flex; margin-bottom: 1rem; margin-top: 1rem"
       >
         <button @click="updateMonth(month - 1)">
           -
         </button>
         <div>
-          {{ monthNames[month - 1] }}
+          {{ monthName }}
         </div>
         <button @click="updateMonth(month + 1)">
           +
@@ -32,6 +38,7 @@
         >
           {{ dayObject.number }}
         </button>
+        <button v-else disabled style="width:2rem;height:2rem;"></button>
       </h-calendar-days>
     </headless-calendar>
   </div>
