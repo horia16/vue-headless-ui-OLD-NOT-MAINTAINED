@@ -1,6 +1,6 @@
 {
   "name": "vue-headless-ui",
-  "version": "0.0.15-alpha.2",
+  "version": "0.0.16-alpha.1",
   "description": "Vue 3 headless library.",
   "main": "dist/vue-headless-ui.ssr.js",
   "browser": "dist/vue-headless-ui.esm.js",
