@@ -6,6 +6,7 @@
       v-model="date"
       :use-date="false"
       :disabled-dates="['2021-09-24', new Date()]"
+      :custom-modifiers="[isInBetween]"
       locale="en"
     >
       <h-calendar-controls
@@ -33,7 +34,7 @@
           v-if="dayObject"
           style="width:2rem;height:2rem;"
           :disabled="dayObject.disabled"
-          :style="selected ? 'background-color: blue;' : ''"
+          :style="selected ? 'background-color: blue;' : dayObject.meta.inBetween ? 'background-color: red;' : ''"
           @click="updateDay(dayObject.number)"
         >
           {{ dayObject.number }}
@@ -51,14 +52,29 @@ import HeadlessCalendar from "@/lib-components/user-interface/HeadlessCalendar/H
 import HCalendarDays from "@/lib-components/user-interface/HeadlessCalendar/HCalendarDays.vue";
 import HCalendarControls from "@/lib-components/user-interface/HeadlessCalendar/HCalendarControls.vue";
 import HCalendarWeekdays from "@/lib-components/user-interface/HeadlessCalendar/HCalendarWeekdays.vue";
+import { DayObject, compareDate } from "@/utils/calendar";
 
 export default defineComponent({
   name: "ServeDev",
   components: { HCalendarWeekdays, HCalendarControls, HCalendarDays, HeadlessCalendar, Inputs },
   setup() {
-    const date = ref(null);
+    const date = ref<Array<Date> | null>(null);
+
+    function isInBetween(dayObject: DayObject) {
+      let inBetween = false;
+      if (date.value) {
+        if (
+          compareDate(dayObject.date, date.value[0], "future") &&
+          compareDate(dayObject.date, date.value[1], "past")
+        ) {
+          inBetween = true;
+        }
+      }
+      return { ...dayObject, meta: { inBetween } };
+    }
     return {
-      date
+      date,
+      isInBetween
     };
   }
 });
