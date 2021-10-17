@@ -1,3 +1,4 @@
+/* eslint-disable vue/one-component-per-file */
 import { ComponentPublicInstance, defineComponent, nextTick, ref } from "vue";
 import { mount, shallowMount } from "@vue/test-utils";
 import { HeadlessButton, HeadlessForm, HeadlessInput, InputError, InputField } from "../src/entry.esm";

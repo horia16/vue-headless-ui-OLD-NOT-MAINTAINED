@@ -17,6 +17,9 @@ export default defineComponent({
     as: { type: String, default: "div" },
     id: { type: [String, Number], default: null }
   },
+  emits: {
+    "update:modelValue": null
+  },
   setup(props, context) {
     const selfOpen = ref(!!props.openByDefault);
     const accordionId = computed(() => {

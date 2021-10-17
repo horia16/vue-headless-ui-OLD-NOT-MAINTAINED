@@ -1,26 +1,20 @@
-import { computed, ComputedRef, PropType, Ref, SetupContext, watch, WritableComputedRef } from "vue";
+import { computed, PropType, Ref, SetupContext, watch, WritableComputedRef } from "vue";
 import { useField } from "vee-validate";
 import { randomString } from "@/utils";
 
-export type InputProps = Readonly<
-  {
-    modelValue?: unknown;
-    options: unknown;
-    id?: unknown;
-    name?: unknown;
-    rules?: unknown;
-    group?: unknown;
-    overrideState?: unknown;
-  } & {
-    modelValue: string | number | boolean | unknown[] | Record<string, any>;
-    options: Record<string, any>[] | null;
-    id: string | number | null;
-    name: string | number | null;
-    rules: string | Function | null;
-    group: boolean;
-    overrideState: InputState | null;
-  }
->;
+export type InputProps = Readonly<{
+  modelValue: string | number | boolean | unknown[] | Record<string, unknown> | null;
+  options: Record<string, unknown>[] | null;
+  id: string | number | null;
+  name: string | number | null;
+  rules:
+    | string
+    | ((val: string | number | boolean | unknown[] | Record<string, unknown> | null) => boolean | string)
+    | null
+    | Record<string, any>;
+  group: boolean;
+  overrideState: InputState | null;
+}>;
 
 export enum InputState {
   Clear = "clear",
@@ -43,7 +37,7 @@ export interface ValidationResult {
 }
 
 export interface FieldData {
-  errorMessage: ComputedRef<string | undefined>;
+  errorMessage: Ref<string | undefined>;
   value: Ref<unknown> | WritableComputedRef<unknown>;
   meta: FieldMeta<unknown>;
   validate: () => Promise<ValidationResult>;
@@ -55,14 +49,19 @@ export interface FieldData {
 export const props = {
   modelValue: {
     type: [String, Number, Boolean, Array, Object] as PropType<
-      string | number | boolean | unknown[] | Record<string, any>
+      string | number | boolean | unknown[] | Record<string, unknown> | null
     >,
     default: null
   },
-  options: { type: Array as PropType<Array<Record<string, any>>>, default: null },
+  options: { type: Array as PropType<Array<Record<string, unknown>>>, default: null },
   id: { type: [String, Number], default: null },
   name: { type: [String, Number], default: null },
-  rules: { type: [String, Function], default: null },
+  rules: {
+    type: [String, Function, Object] as PropType<
+      string | ((val: unknown) => boolean | string) | Record<string, any> | null
+    >,
+    default: null
+  },
   group: { type: Boolean, default: false },
   overrideState: { type: String as PropType<InputState>, default: null }
 };
@@ -71,7 +70,7 @@ export const props = {
  */
 export const emits = {
   blur: null,
-  "update:modelValue": (value: string | number | boolean | unknown[] | undefined) => {
+  "update:modelValue": (value: string | number | boolean | unknown[] | undefined): boolean => {
     if (value === undefined) {
       console.warn("Input context returned undefined value");
       return false;

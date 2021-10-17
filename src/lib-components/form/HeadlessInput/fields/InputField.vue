@@ -2,8 +2,8 @@
   <input
     :id="id"
     v-model="inputValue"
-    :aria-describedby="errorMessage && state === 'error' ? `${id}-error` : null"
-    :aria-invalid="errorMessage && state === 'error'"
+    :aria-describedby="errorMessage && state === 'error' ? `${id}-error` : undefined"
+    :aria-invalid="errorMessage && state === 'error' ? true : undefined"
     :name="name"
     @blur="handleBlur"
   />

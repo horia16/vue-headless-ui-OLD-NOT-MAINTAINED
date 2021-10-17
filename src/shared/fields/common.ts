@@ -1,9 +1,9 @@
-import { inject } from "vue";
+import { inject, WritableComputedRef } from "vue";
 import { injectionKeys, isMissingInjectable } from "@/utils";
 
 export const emits = { blur: null };
 export function setup() {
-  const inputValue = inject(injectionKeys.FORM.INPUT_VALUE);
+  const inputValue = inject(injectionKeys.FORM.INPUT_VALUE) as WritableComputedRef<any>;
   const id = inject(injectionKeys.FORM.ID);
   const name = inject(injectionKeys.FORM.NAME);
   const errorMessage = inject(injectionKeys.FORM.ERROR_MESSAGE);
