@@ -1,6 +1,7 @@
 {
   "root": true,
   "env": {
+    "vue/setup-compiler-macros": true,
     "browser": true,
     "node": true
   },
@@ -12,6 +13,7 @@
   },
   "extends": ["plugin:vue/vue3-strongly-recommended", "eslint:recommended", "@vue/typescript/recommended", "prettier"],
   "rules": {
-    "@typescript-eslint/explicit-module-boundary-types": "off"
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-explicit-any": "warn"
   }
 }
