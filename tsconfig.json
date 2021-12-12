@@ -13,7 +13,7 @@
     "esModuleInterop": true,
     "noImplicitAny": false,
     "lib": ["esnext", "dom"],
-    "types": ["node"],
+    "types": ["node","jest"],
     "paths": {
       "@/*": ["./src/*"]
     },

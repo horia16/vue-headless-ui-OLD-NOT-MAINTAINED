@@ -37,7 +37,7 @@ import HeadlessInput from "@/components/HeadlessInput/HeadlessInput.vue";
 import TextField from "@/components/HeadlessInput/fields/TextField.vue";
 import SelectField from "@/components/HeadlessInput/fields/SelectField.vue";
 import TickboxField from "@/components/HeadlessInput/fields/TickboxField.vue";
-import HeadlessInputLabel from "@/components/HeadlessInput/shared/HeadlessInputLabel.vue";
+import HeadlessInputLabel from "@/components/HeadlessInput/shared/InputLabel.vue";
 const test = ref<string | null>(null);
 const data = reactive({
   select: null,

@@ -13,8 +13,8 @@
 </template>
 <script setup lang="ts">
 import HeadlessAccordion from "@/components/HeadlessAccordion/HeadlessAccordion.vue";
-import HeadlessAccordionToggle from "@/components/HeadlessAccordion/HeadlessAccordionToggle.vue";
-import HeadlessAccordionContent from "@/components/HeadlessAccordion/HeadlessAccordionContent.vue";
+import HeadlessAccordionToggle from "@/components/HeadlessAccordion/AccordionToggle.vue";
+import HeadlessAccordionContent from "@/components/HeadlessAccordion/AccordionContent.vue";
 import { ref } from "vue";
 const test = ref(25);
 </script>
