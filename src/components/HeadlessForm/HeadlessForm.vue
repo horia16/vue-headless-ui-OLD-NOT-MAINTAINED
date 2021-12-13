@@ -3,6 +3,11 @@
     <slot :errorCount="errorCount" :errors="errors" :submit="submit"></slot>
   </form>
 </template>
+<script lang="ts">
+export default {
+  name: "HeadlessForm"
+};
+</script>
 <script setup lang="ts">
 import useHeadlessForm from "@/hooks/from";
 import { PropType } from "vue";

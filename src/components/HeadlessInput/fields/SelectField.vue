@@ -4,6 +4,11 @@
     <option v-for="(option, index) in options" :key="index" :value="option[valueKey]">{{ option[nameKey] }}</option>
   </select>
 </template>
+<script lang="ts">
+export default {
+  name: "SelectField"
+};
+</script>
 <script setup lang="ts">
 import { inputKeys } from "@/injection-keys/input";
 import { inject, computed } from "vue";

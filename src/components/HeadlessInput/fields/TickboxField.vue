@@ -15,6 +15,11 @@
   />
   <slot name="after" />
 </template>
+<script lang="ts">
+export default {
+  name: "TickboxField"
+};
+</script>
 <script setup lang="ts">
 import useArrayLink from "@/hooks/array-link";
 import { inputKeys } from "@/injection-keys/input";

@@ -5,6 +5,11 @@
     </slot>
   </component>
 </template>
+<script lang="ts">
+export default {
+  name: "InputError"
+};
+</script>
 <script setup lang="ts">
 defineProps({
   tag: {

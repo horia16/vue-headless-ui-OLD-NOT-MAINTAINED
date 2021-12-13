@@ -11,6 +11,11 @@
     @blur="handleBlur"
   />
 </template>
+<script lang="ts">
+export default {
+  name: "TextField"
+};
+</script>
 <script setup lang="ts">
 import { inputKeys } from "@/injection-keys/input";
 import { inject, computed } from "vue";

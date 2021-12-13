@@ -20,7 +20,7 @@
   "types": "dist/types/index.d.ts",
   "files": [
     "dist/*",
-    "src/**/*.vue"
+    "LICENSE"
   ],
   "sideEffects": false,
   "peerDependencies": {

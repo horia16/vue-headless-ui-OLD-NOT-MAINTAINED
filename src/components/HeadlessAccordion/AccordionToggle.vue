@@ -14,6 +14,11 @@
     </component>
   </slot>
 </template>
+<script lang="ts">
+export default {
+  name: "AccordionToggle"
+};
+</script>
 <script setup lang="ts">
 import { inject, computed } from "vue";
 import { accordionKeys } from "@/injection-keys/accordion";

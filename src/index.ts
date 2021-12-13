@@ -10,3 +10,8 @@ export { default as HeadlessForm } from "@/components/HeadlessForm/HeadlessForm.
 export { default as HeadlessAccordion } from "@/components/HeadlessAccordion/HeadlessAccordion.vue";
 export { default as AccordionContent } from "@/components/HeadlessAccordion/AccordionContent.vue";
 export { default as AccordionToggle } from "@/components/HeadlessAccordion/AccordionToggle.vue";
+
+export { default as HeadlessTabs } from "@/components/HeadlessTabs/HeadlessTabs.vue";
+export { default as Tab } from "@/components/HeadlessTabs/Tab.vue";
+export { default as TabSwitch } from "@/components/HeadlessTabs/TabSwitch.vue";
+export { default as TabSwitchList } from "@/components/HeadlessTabs/TabSwitchList.vue";

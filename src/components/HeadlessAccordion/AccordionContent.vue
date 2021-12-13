@@ -12,6 +12,11 @@
     <slot :open="open" :toggleAccordion="toggleAccordion" />
   </component>
 </template>
+<script lang="ts">
+export default {
+  name: "AccordionContent"
+};
+</script>
 <script setup lang="ts">
 import { accordionKeys } from "@/injection-keys/accordion";
 import { inject, Ref, ref, watch, computed, onUpdated, onMounted, nextTick } from "vue";
@@ -92,7 +97,6 @@ watch([state, height], () => {
 onMounted(() => {
   if (wrapper.value) height.value = wrapper.value.scrollHeight;
 });
-
 onUpdated(() => {
   if (wrapper.value) height.value = wrapper.value.scrollHeight;
   nextTick(() => {

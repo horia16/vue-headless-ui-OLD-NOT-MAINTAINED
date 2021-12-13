@@ -1,8 +1,18 @@
 <template>
-  <component :is="radio || checkbox ? 'fieldset' : 'div'" data-input-wrapper="true" :class="computedClass">
+  <component
+    :is="radio || checkbox ? 'fieldset' : 'div'"
+    data-input-wrapper="true"
+    :class="computedClass"
+    :style="style"
+  >
     <slot :errorMessage="errorMessage" :handleBlur="handleBlur" :meta="meta" :state="state" :validate="validate" />
   </component>
 </template>
+<script lang="ts">
+export default {
+  name: "HeadlessInput"
+};
+</script>
 <script setup lang="ts">
 import { provide, ref, computed, PropType } from "vue";
 import { useFieldContext } from "@/hooks/input";
@@ -20,6 +30,7 @@ const props = defineProps({
   },
   id: { type: [String, Number], default: null },
   class: { type: [String, Object, Array], default: undefined },
+  style: { type: [String, Object, Array], default: undefined },
   name: { type: [String, Number], default: null },
   rules: {
     type: [String, Function, Object] as PropType<
