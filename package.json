@@ -1,68 +1,55 @@
 {
   "name": "vue-headless-ui",
-  "version": "0.0.1-unstable1",
-  "description": "Vue 3 headless component library.",
-  "main": "dist/vue-headless-ui.esm.js",
-  "module": "dist/vue-headless-ui.esm.js",
-  "author": {
-    "name": "Ioan-Horia Rotaru",
-    "email": "horia.rotaru1@gmail.com"
-  },
+  "private": true,
+  "version": "0.0.0",
   "scripts": {
     "dev": "vite",
     "prebuild": "rimraf ./dist",
-    "build": "cross-env NODE_ENV=production rollup --config rollup.config.js",
-    "postbuild": "rimraf ./dist/types/dev ./dist/types/entry.d.ts",
-    "pretty": "prettier --write \"./**/*.{js,jsx,json,vue,ts,tsx}\"",
-    "build-vite": "vite build",
-    "test": "jest src"
+    "build": "vue-tsc --noEmit && vite build && rollup --config rollup.config.js",
+    "postbuild": "rimraf ./dist/env.d.ts ./dist/auto-imports.d.ts ./dist/rollup_build.js ./dist/_development",
+    "preview": "vite preview",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
   },
-  "types": "dist/types/index.d.ts",
   "files": [
-    "dist/*",
-    "LICENSE"
+    "dist"
   ],
-  "sideEffects": false,
+  "types": "./dist/index.d.ts",
+  "main": "./dist/vue-headless-ui.umd.js",
+  "module": "./dist/vue-headless-ui.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/vue-headless-ui.es.js",
+      "require": "./dist/vue-headless-ui.umd.js"
+    }
+  },
   "peerDependencies": {
-    "vee-validate": "^4.5.6",
-    "vue": "^3.2.23"
+    "vue": "^3.2.37"
   },
   "devDependencies": {
-    "@babel/core": "^7.16.0",
-    "@babel/preset-env": "^7.16.4",
-    "@babel/preset-typescript": "^7.16.0",
-    "@rollup/plugin-alias": "^3.1.8",
-    "@rollup/plugin-babel": "^5.3.0",
-    "@rollup/plugin-commonjs": "^21.0.1",
-    "@rollup/plugin-node-resolve": "^13.0.6",
-    "@rollup/plugin-replace": "^3.0.0",
-    "@types/jest": "^27.0.3",
-    "@types/node": "^16.11.12",
-    "@typescript-eslint/eslint-plugin": "^5.0.0",
-    "@typescript-eslint/parser": "^5.0.0",
-    "@vitejs/plugin-vue": "^1.10.2",
-    "@vue/eslint-config-typescript": "^9.1.0",
-    "@vue/test-utils": "^2.0.0-rc.17",
+    "@rollup/plugin-alias": "^3.1.9",
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "@types/node": "^18.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.29.0",
+    "@typescript-eslint/parser": "^5.29.0",
+    "@vitejs/plugin-vue": "^2.3.3",
+    "@vue/test-utils": "^2.0.0",
     "@zerollup/ts-transform-paths": "^1.7.18",
-    "cross-env": "^7.0.3",
-    "eslint": "^8.0.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-vue": "^8.0.1",
-    "jest": "^26.6.3",
-    "postcss": "^8.4.4",
-    "prettier": "^2.5.1",
+    "c8": "^7.11.3",
+    "eslint": "^8.18.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-vue": "^9.1.1",
+    "happy-dom": "^5.3.1",
     "rimraf": "^3.0.2",
-    "rollup": "^2.60.2",
-    "rollup-plugin-postcss": "^4.0.2",
-    "rollup-plugin-typescript2": "^0.31.1",
+    "rollup-plugin-typescript2": "^0.32.1",
     "rollup-plugin-vue": "^6.0.0",
-    "ts-jest": "^26.5.6",
     "ttypescript": "^1.5.13",
-    "typescript": "^4.4.4",
-    "typescript-transform-paths": "^3.3.1",
-    "vite": "^2.7.0",
-    "vue": "^3.2.23",
-    "vue-jest": "^5.0.0-alpha.10",
-    "vue-tsc": "^0.28.10"
+    "typescript": "^4.7.4",
+    "unplugin-auto-import": "^0.9.1",
+    "vite": "^2.9.12",
+    "vite-plugin-eslint": "^1.6.1",
+    "vitest": "^0.16.0",
+    "vue": "^3.2.37",
+    "vue-tsc": "^0.38.1"
   }
 }

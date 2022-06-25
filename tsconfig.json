@@ -2,18 +2,18 @@
   "compilerOptions": {
     "target": "esnext",
     "useDefineForClassFields": true,
-    "declaration": true,
-    "declarationDir": "dist/types",
     "module": "esnext",
     "moduleResolution": "node",
+    "declaration": true,
     "strict": true,
     "jsx": "preserve",
     "sourceMap": true,
     "resolveJsonModule": true,
+    "isolatedModules": true,
     "esModuleInterop": true,
-    "noImplicitAny": false,
     "lib": ["esnext", "dom"],
-    "types": ["node","jest"],
+    "skipLibCheck": true,
+    "types": ["node"],
     "paths": {
       "@/*": ["./src/*"]
     },
@@ -24,5 +24,6 @@
       }
     ]
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/env.d.ts"]
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }
